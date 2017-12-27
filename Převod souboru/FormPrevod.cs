@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Převod_souboru
 {
-    public partial class Form1 : Form
+    public partial class FormPrevod : Form
     {
-        public Form1()
+        public FormPrevod()
         {
             InitializeComponent();
         }

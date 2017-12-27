@@ -1,6 +1,6 @@
 ﻿namespace Převod_souboru
 {
-    partial class Form1
+    partial class FormPrevod
     {
         /// <summary>
         /// Vyžaduje se proměnná návrháře.
@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // FormPrevod
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "FormPrevod";
+            this.Text = "Převod souboru";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
