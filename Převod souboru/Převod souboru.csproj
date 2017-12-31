@@ -51,8 +51,10 @@
     <Compile Include="FormPrevod.Designer.cs">
       <DependentUpon>FormPrevod.cs</DependentUpon>
     </Compile>
+    <Compile Include="Prevod.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Statistiky.cs" />
     <EmbeddedResource Include="FormPrevod.resx">
       <DependentUpon>FormPrevod.cs</DependentUpon>
     </EmbeddedResource>

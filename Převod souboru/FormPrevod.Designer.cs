@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ButtonOtevri = new System.Windows.Forms.Button();
+            this.buttonUloz = new System.Windows.Forms.Button();
+            this.buttonPreved = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelOtevri = new System.Windows.Forms.Label();
+            this.labelUloz = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.labelVstupVety = new System.Windows.Forms.Label();
+            this.labelVstupSlova = new System.Windows.Forms.Label();
+            this.labelVstupZnaky = new System.Windows.Forms.Label();
+            this.labelVstupRadky = new System.Windows.Forms.Label();
+            this.checkedListBox = new System.Windows.Forms.CheckedListBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -53,10 +53,10 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
+            this.labelVystupVety = new System.Windows.Forms.Label();
+            this.labelVystupSlova = new System.Windows.Forms.Label();
+            this.labelVystupZnaky = new System.Windows.Forms.Label();
+            this.labelVystupRadky = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -68,72 +68,69 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // button2
+            // ButtonOtevri
             // 
-            this.button2.Location = new System.Drawing.Point(12, 30);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Otevři";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.ButtonOtevri.Location = new System.Drawing.Point(49, 30);
+            this.ButtonOtevri.Name = "ButtonOtevri";
+            this.ButtonOtevri.Size = new System.Drawing.Size(75, 23);
+            this.ButtonOtevri.TabIndex = 2;
+            this.ButtonOtevri.Text = "Otevři";
+            this.ButtonOtevri.UseVisualStyleBackColor = true;
+            this.ButtonOtevri.Click += new System.EventHandler(this.ButtonOtevri_Click);
             // 
-            // button3
+            // buttonUloz
             // 
-            this.button3.Location = new System.Drawing.Point(408, 30);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Ulož do";
-            this.button3.UseVisualStyleBackColor = true;
+            this.buttonUloz.Location = new System.Drawing.Point(446, 30);
+            this.buttonUloz.Name = "buttonUloz";
+            this.buttonUloz.Size = new System.Drawing.Size(75, 23);
+            this.buttonUloz.TabIndex = 3;
+            this.buttonUloz.Text = "Ulož do";
+            this.buttonUloz.UseVisualStyleBackColor = true;
+            this.buttonUloz.Click += new System.EventHandler(this.buttonUloz_Click);
             // 
-            // button1
+            // buttonPreved
             // 
-            this.button1.Location = new System.Drawing.Point(249, 30);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(68, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Převést";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.buttonPreved.Location = new System.Drawing.Point(253, 54);
+            this.buttonPreved.Name = "buttonPreved";
+            this.buttonPreved.Size = new System.Drawing.Size(68, 23);
+            this.buttonPreved.TabIndex = 4;
+            this.buttonPreved.Text = "Převeď";
+            this.buttonPreved.UseVisualStyleBackColor = true;
+            this.buttonPreved.Click += new System.EventHandler(this.buttonPreved_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(83, 0);
+            this.label1.Location = new System.Drawing.Point(46, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 13);
             this.label1.TabIndex = 8;
             this.label1.Text = "Vstupní soubor";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(405, 0);
+            this.label2.Location = new System.Drawing.Point(443, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 13);
             this.label2.TabIndex = 9;
             this.label2.Text = "Výstupní soubor";
             // 
-            // label3
+            // labelOtevri
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(93, 35);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Cesta";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.labelOtevri.AutoSize = true;
+            this.labelOtevri.Location = new System.Drawing.Point(15, 59);
+            this.labelOtevri.Name = "labelOtevri";
+            this.labelOtevri.Size = new System.Drawing.Size(0, 13);
+            this.labelOtevri.TabIndex = 10;
             // 
-            // label4
+            // labelUloz
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(489, 35);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Cesta";
+            this.labelUloz.AutoSize = true;
+            this.labelUloz.Location = new System.Drawing.Point(405, 59);
+            this.labelUloz.Name = "labelUloz";
+            this.labelUloz.Size = new System.Drawing.Size(0, 13);
+            this.labelUloz.TabIndex = 11;
             // 
             // label5
             // 
@@ -143,7 +140,6 @@
             this.label5.Size = new System.Drawing.Size(53, 13);
             this.label5.TabIndex = 12;
             this.label5.Text = "Počet vět";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
@@ -172,58 +168,58 @@
             this.label8.TabIndex = 15;
             this.label8.Text = "Počet řádků";
             // 
-            // label13
+            // labelVstupVety
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(84, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(13, 13);
-            this.label13.TabIndex = 20;
-            this.label13.Text = "0";
+            this.labelVstupVety.AutoSize = true;
+            this.labelVstupVety.Location = new System.Drawing.Point(84, 0);
+            this.labelVstupVety.Name = "labelVstupVety";
+            this.labelVstupVety.Size = new System.Drawing.Size(13, 13);
+            this.labelVstupVety.TabIndex = 20;
+            this.labelVstupVety.Text = "0";
             // 
-            // label14
+            // labelVstupSlova
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(84, 24);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(13, 13);
-            this.label14.TabIndex = 20;
-            this.label14.Text = "0";
+            this.labelVstupSlova.AutoSize = true;
+            this.labelVstupSlova.Location = new System.Drawing.Point(84, 24);
+            this.labelVstupSlova.Name = "labelVstupSlova";
+            this.labelVstupSlova.Size = new System.Drawing.Size(13, 13);
+            this.labelVstupSlova.TabIndex = 20;
+            this.labelVstupSlova.Text = "0";
             // 
-            // label15
+            // labelVstupZnaky
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(84, 48);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(13, 13);
-            this.label15.TabIndex = 20;
-            this.label15.Text = "0";
+            this.labelVstupZnaky.AutoSize = true;
+            this.labelVstupZnaky.Location = new System.Drawing.Point(84, 48);
+            this.labelVstupZnaky.Name = "labelVstupZnaky";
+            this.labelVstupZnaky.Size = new System.Drawing.Size(13, 13);
+            this.labelVstupZnaky.TabIndex = 20;
+            this.labelVstupZnaky.Text = "0";
             // 
-            // label16
+            // labelVstupRadky
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(84, 74);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(13, 13);
-            this.label16.TabIndex = 20;
-            this.label16.Text = "0";
+            this.labelVstupRadky.AutoSize = true;
+            this.labelVstupRadky.Location = new System.Drawing.Point(84, 74);
+            this.labelVstupRadky.Name = "labelVstupRadky";
+            this.labelVstupRadky.Size = new System.Drawing.Size(13, 13);
+            this.labelVstupRadky.TabIndex = 20;
+            this.labelVstupRadky.Text = "0";
             // 
-            // checkedListBox1
+            // checkedListBox
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
+            this.checkedListBox.FormattingEnabled = true;
+            this.checkedListBox.Items.AddRange(new object[] {
             "Odstranit diakritiku",
             "Odstranit řádky",
             "Odstranit mezery a interpunkci"});
-            this.checkedListBox1.Location = new System.Drawing.Point(197, 59);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(170, 49);
-            this.checkedListBox1.TabIndex = 25;
+            this.checkedListBox.Location = new System.Drawing.Point(201, 83);
+            this.checkedListBox.Name = "checkedListBox";
+            this.checkedListBox.Size = new System.Drawing.Size(170, 49);
+            this.checkedListBox.TabIndex = 25;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Převod_souboru.Properties.Resources.long_arrow_right1600;
-            this.pictureBox1.Location = new System.Drawing.Point(197, 30);
+            this.pictureBox1.Location = new System.Drawing.Point(201, 54);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(36, 23);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -233,7 +229,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Převod_souboru.Properties.Resources.long_arrow_right1600;
-            this.pictureBox2.Location = new System.Drawing.Point(331, 30);
+            this.pictureBox2.Location = new System.Drawing.Point(335, 54);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(36, 23);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -249,11 +245,11 @@
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label13, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label14, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label15, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label16, 1, 3);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 59);
+            this.tableLayoutPanel1.Controls.Add(this.labelVstupVety, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelVstupSlova, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelVstupZnaky, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.labelVstupRadky, 1, 3);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 83);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -272,11 +268,11 @@
             this.tableLayoutPanel2.Controls.Add(this.label22, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label23, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.label24, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label25, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label26, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label27, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label28, 1, 3);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(408, 59);
+            this.tableLayoutPanel2.Controls.Add(this.labelVystupVety, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.labelVystupSlova, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.labelVystupZnaky, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.labelVystupRadky, 1, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(408, 83);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 4;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -322,41 +318,41 @@
             this.label24.TabIndex = 15;
             this.label24.Text = "Počet řádků";
             // 
-            // label25
+            // labelVystupVety
             // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(84, 0);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(13, 13);
-            this.label25.TabIndex = 20;
-            this.label25.Text = "0";
+            this.labelVystupVety.AutoSize = true;
+            this.labelVystupVety.Location = new System.Drawing.Point(84, 0);
+            this.labelVystupVety.Name = "labelVystupVety";
+            this.labelVystupVety.Size = new System.Drawing.Size(13, 13);
+            this.labelVystupVety.TabIndex = 20;
+            this.labelVystupVety.Text = "0";
             // 
-            // label26
+            // labelVystupSlova
             // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(84, 24);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(13, 13);
-            this.label26.TabIndex = 20;
-            this.label26.Text = "0";
+            this.labelVystupSlova.AutoSize = true;
+            this.labelVystupSlova.Location = new System.Drawing.Point(84, 24);
+            this.labelVystupSlova.Name = "labelVystupSlova";
+            this.labelVystupSlova.Size = new System.Drawing.Size(13, 13);
+            this.labelVystupSlova.TabIndex = 20;
+            this.labelVystupSlova.Text = "0";
             // 
-            // label27
+            // labelVystupZnaky
             // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(84, 48);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(13, 13);
-            this.label27.TabIndex = 20;
-            this.label27.Text = "0";
+            this.labelVystupZnaky.AutoSize = true;
+            this.labelVystupZnaky.Location = new System.Drawing.Point(84, 48);
+            this.labelVystupZnaky.Name = "labelVystupZnaky";
+            this.labelVystupZnaky.Size = new System.Drawing.Size(13, 13);
+            this.labelVystupZnaky.TabIndex = 20;
+            this.labelVystupZnaky.Text = "0";
             // 
-            // label28
+            // labelVystupRadky
             // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(84, 74);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(13, 13);
-            this.label28.TabIndex = 20;
-            this.label28.Text = "0";
+            this.labelVystupRadky.AutoSize = true;
+            this.labelVystupRadky.Location = new System.Drawing.Point(84, 74);
+            this.labelVystupRadky.Name = "labelVystupRadky";
+            this.labelVystupRadky.Size = new System.Drawing.Size(13, 13);
+            this.labelVystupRadky.TabIndex = 20;
+            this.labelVystupRadky.Text = "0";
             // 
             // FormPrevod
             // 
@@ -367,14 +363,14 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.checkedListBox1);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.checkedListBox);
+            this.Controls.Add(this.labelUloz);
+            this.Controls.Add(this.labelOtevri);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonPreved);
+            this.Controls.Add(this.buttonUloz);
+            this.Controls.Add(this.ButtonOtevri);
             this.Name = "FormPrevod";
             this.Text = "Převod souboru";
             this.Load += new System.EventHandler(this.FormPrevod_Load);
@@ -392,22 +388,22 @@
         #endregion
 
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ButtonOtevri;
+        private System.Windows.Forms.Button buttonUloz;
+        private System.Windows.Forms.Button buttonPreved;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelOtevri;
+        private System.Windows.Forms.Label labelUloz;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.Label labelVstupVety;
+        private System.Windows.Forms.Label labelVstupSlova;
+        private System.Windows.Forms.Label labelVstupZnaky;
+        private System.Windows.Forms.Label labelVstupRadky;
+        private System.Windows.Forms.CheckedListBox checkedListBox;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -416,10 +412,10 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label labelVystupVety;
+        private System.Windows.Forms.Label labelVystupSlova;
+        private System.Windows.Forms.Label labelVystupZnaky;
+        private System.Windows.Forms.Label labelVystupRadky;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
