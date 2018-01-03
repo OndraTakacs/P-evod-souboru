@@ -62,8 +62,10 @@ namespace Pøevod_souboru
         private bool posledniBilyInterpunkce = false;
 
 
-        public void preved()
+        public string preved(int maxRadku = -1)
         {
+            string nahled = "";
+            int radku = 0;
             reset();
             using (StreamReader sr = new StreamReader(VstupniSoubor))
             {
@@ -94,13 +96,29 @@ namespace Pøevod_souboru
                             novyRadek = radek;
 
                         if (!odstranPrazdnyRadek(novyRadek))
-                            sw.WriteLine(novyRadek);
+                        {
+                            if (sr.Peek() == -1)
+                            {
+                                sw.Write(novyRadek);
+                            }
+                            else
+                                sw.WriteLine(novyRadek);
+
+                            nahled += novyRadek + System.Environment.NewLine;
+                            radku++;
+                        }
 
                         Stav += radek.Length;
+
+                        if (maxRadku > -1 && radku >= maxRadku)
+                        {
+                            break;
+                        }
                     }
                 }
             }
             Stav = DelkaSouboru;
+            return nahled;
         }
 
         // vrací true, když se má odstranit øádek

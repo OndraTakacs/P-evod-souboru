@@ -22,12 +22,13 @@ namespace Převod_souboru
         private string vstupniSoubor;
         private string VstupniSoubor
         {
-          get { return vstupniSoubor; }
-          set {
+            get { return vstupniSoubor; }
+            set
+            {
                 vstupniSoubor = value;
                 prevod.VstupniSoubor = value;
                 vstupStatistiky.Soubor = value;
-           }
+            }
         }
 
         private string vystupniSoubor;
@@ -64,25 +65,16 @@ namespace Převod_souboru
 
         private void buttonPreved_Click(object sender, EventArgs e)
         {
-            if (vstupniSoubor == null)
-            {
-                MessageBox.Show("Vyberte vstupní soubor", "Upozornění");
+            if (!kontrolaSouboru(true))
                 return;
-            }
-            if (vystupniSoubor == null)
-            {
-                MessageBox.Show("Vyberte výstupní soubor", "Upozornění");
-                return;
-            }
-
-            prevod.odstranitRadky = checkBoxRadky.Checked;
-            prevod.odstranitDiakritiku = checkBoxDiakritika.Checked;
-            prevod.odstranitInterpunkci = checkBoxMezery.Checked;
 
             progressBar1.Visible = true;
             labelProgress.Visible = true;
             prevod.DelkaSouboru = vstupStatistiky.Znaky;
+
+            uzamkni();
             prevod.preved();
+            odemkni();
 
             vystupStatistiky.spocitej();
             labelVystupVety.Text = vystupStatistiky.Vety.ToString();
@@ -96,8 +88,11 @@ namespace Převod_souboru
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 VstupniSoubor = openFileDialog1.FileName;
-                labelOtevri.Text = System.IO.Path.GetFileName(VstupniSoubor);
-                labelOtevri.Visible = true;
+                textBoxVstup.Text = System.IO.Path.GetFileName(VstupniSoubor);
+
+                textBoxNahledVstup.Text = vratNahled(VstupniSoubor, 10);
+                if (kontrolaSouboru(false))
+                    textBoxNahledVystup.Text = prevod.preved(10);
 
                 vstupStatistiky.spocitej();
                 labelVstupVety.Text = vstupStatistiky.Vety.ToString();
@@ -112,9 +107,86 @@ namespace Převod_souboru
             if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 VystupniSoubor = saveFileDialog1.FileName;
-                labelUloz.Text = System.IO.Path.GetFileName(VystupniSoubor);
-                labelUloz.Visible = true;
+                textBoxVystup.Text = System.IO.Path.GetFileName(VystupniSoubor);
+
+                zobrazVystupNahled();
             }
+        }
+
+        private string vratNahled(string soubor, int radku)
+        {
+            string nahled = "";
+            StreamReader sr = new StreamReader(soubor);
+            for (int i = 0; i < radku; i++)
+            {
+                if (sr.Peek() == -1)
+                    break;
+                nahled += sr.ReadLine() + System.Environment.NewLine;
+            }
+            return nahled;
+        }
+
+        private void zobrazVystupNahled()
+        {
+            textBoxNahledVystup.Text = prevod.preved(10);
+        }
+
+        private void checkBoxDiakritika_CheckedChanged(object sender, EventArgs e)
+        {
+            prevod.odstranitDiakritiku = checkBoxDiakritika.Checked;
+
+            if (kontrolaSouboru(false))
+                zobrazVystupNahled();
+        }
+
+        private void checkBoxRadky_CheckedChanged(object sender, EventArgs e)
+        {
+            prevod.odstranitRadky = checkBoxRadky.Checked;
+            if (kontrolaSouboru(false))
+                zobrazVystupNahled();
+        }
+
+        private void checkBoxMezery_CheckedChanged(object sender, EventArgs e)
+        {
+            prevod.odstranitInterpunkci = checkBoxMezery.Checked;
+            if (kontrolaSouboru(false))
+                zobrazVystupNahled();
+        }
+
+        private bool kontrolaSouboru(bool upozorneni)
+        {
+            if (vstupniSoubor == null)
+            {
+                if (upozorneni)
+                    MessageBox.Show("Vyberte vstupní soubor", "Upozornění");
+                return false;
+            }
+            if (vystupniSoubor == null)
+            {
+                if (upozorneni)
+                    MessageBox.Show("Vyberte výstupní soubor", "Upozornění");
+                return false;
+            }
+            return true;
+        }
+
+        private void uzamkni()
+        {
+            ButtonOtevri.Enabled = false;
+            ButtonUloz.Enabled = false;
+            checkBoxDiakritika.Enabled = false;
+            checkBoxMezery.Enabled = false;
+            checkBoxRadky.Enabled = false;
+        }
+
+
+        private void odemkni()
+        {
+            ButtonOtevri.Enabled = true;
+            ButtonUloz.Enabled = true;
+            checkBoxDiakritika.Enabled = true;
+            checkBoxMezery.Enabled = true;
+            checkBoxRadky.Enabled = true;
         }
     }
 }

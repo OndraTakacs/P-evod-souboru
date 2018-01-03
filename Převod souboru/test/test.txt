@@ -1,0 +1,10 @@
+Háčky čárky
+Věta1. Věta2.
+věty.bez.velkých.písmen.a.mezer.
+
+prázdné
+
+řádky
+
+
+CamelCaseUkázka
