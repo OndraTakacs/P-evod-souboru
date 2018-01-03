@@ -58,6 +58,8 @@
             this.labelVystupZnaky = new System.Windows.Forms.Label();
             this.labelVystupRadky = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -119,7 +121,7 @@
             // labelOtevri
             // 
             this.labelOtevri.AutoSize = true;
-            this.labelOtevri.Location = new System.Drawing.Point(15, 59);
+            this.labelOtevri.Location = new System.Drawing.Point(62, 56);
             this.labelOtevri.Name = "labelOtevri";
             this.labelOtevri.Size = new System.Drawing.Size(0, 13);
             this.labelOtevri.TabIndex = 10;
@@ -127,7 +129,7 @@
             // labelUloz
             // 
             this.labelUloz.AutoSize = true;
-            this.labelUloz.Location = new System.Drawing.Point(405, 59);
+            this.labelUloz.Location = new System.Drawing.Point(458, 56);
             this.labelUloz.Name = "labelUloz";
             this.labelUloz.Size = new System.Drawing.Size(0, 13);
             this.labelUloz.TabIndex = 11;
@@ -354,11 +356,31 @@
             this.labelVystupRadky.TabIndex = 20;
             this.labelVystupRadky.Text = "0";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(15, 56);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 13);
+            this.label3.TabIndex = 30;
+            this.label3.Text = "Název:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(411, 56);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 13);
+            this.label4.TabIndex = 31;
+            this.label4.Text = "Název:";
+            // 
             // FormPrevod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(616, 319);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.pictureBox2);
@@ -417,6 +439,8 @@
         private System.Windows.Forms.Label labelVystupZnaky;
         private System.Windows.Forms.Label labelVystupRadky;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 

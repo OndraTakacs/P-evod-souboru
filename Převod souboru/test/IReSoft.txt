@@ -1,0 +1,101 @@
+Cíl: Vypracování úkolu pro pøevod souboru
+Termín: 5.1.2018
+Plán
+1. Nauèit se pracovat v GITHub, základy, vìtve a spojování
+2. Založit základní projekt
+3. Nauèit se základy pracování ve WinForms
+4. Vytvoøit základní GUI
+5. Nauèit se základy pracování v C#
+6. Vytvoøit základní tøídu pro pøevod souboru
+* Navrhnout metody a propojit je s GUI, vnitøek prázdný, Neøešit progress bar
+7. Nauèit se základy práce se soubory v C#
+8. Implementovat statistiky a vytvoøit pro to vìtev
+* Vìty
+* Slova
+* Znaky
+* Øádky
+9. Impl. kopírování
+10. Impl. odstranìní diakritiky
+11. Impl. odstranìní prázdných øádkù
+12. Impl. Odstranìní mezer a interpunkèních znamének
+13. Progress bar
+14. Hezèí GUI
+* Barvy nadpisù
+* Umístìní a pozice
+* Rámeèky
+* Náhledy
+15. Implementace náhledù a potvrzení pøed zaèátkem pøevodu, plus odhad èasu když velké
+16. Nauèit se paralelní zpracování souboru
+* Producer consumer
+* Dataflow
+17. Implementace paralelního zpracování
+* pro statistiky
+* pro pøevody
+18. Testování
+19. Udìlat místo tlaèítek pro pøevod checkboxy s volbami
+20. Projít kód, doplnit komentáøe, psát si další nápady
+Pátek
+1. Vytvoøit plán
+2. Naladit se na vizi mì v IReSoftu, proè to dìlám, vìnování
+3. Nauèit se pracovat v GITHubu, základy, vìtve a spojování
+4. Založit základní projekt
+5. Nauèit se základy pracování ve WinForms
+6. Vytvoøit základní GUI
+8. Pochválit se a užít si to :)
+Sobota
+1. Zkontrolovat plán
+2. Vyèlenit si èas a omezit rušení
+3. Naladit se na vizi mì v IReSoftu, proè to dìlám, vìnování
+4. Nauèit se základy pracování v C#
+5. Pochválit se a užít si to :)
+Nedìle
+1. Zkontrolovat plán
+2. Vyèlenit si èas a omezit rušení
+3. Naladit se na vizi mì v IReSoftu, proè to dìlám, vìnování
+4. Vytvoøit základní tøídu pro pøevod souboru
+5. Navrhnout metody a propojit je s GUI, vnitøek prázdný, Neøešit progress bar
+6. Pochválit se a užít si to :)
+Støeda
+1. Zkontrolovat plán
+2. Naladit se na vizi mì v IReSoftu, proè to dìlám, vìnování
+3. Nauèit se základy práce se soubory v C#
+4. Implementovat statistiky a vytvoøit pro to vìtev
+* Vìty
+* Slova
+* Znaky
+* Øádky
+5. Impl. kopírování
+6. Impl. odstranìní diakritiky
+7. Impl. odstranìní prázdných øádkù
+8. Impl. odstranìní mezer a interpunkèních znamének
+9. Progress bar
+10. Testování
+11. Hezèí GUI
+* Barvy nadpisù
+* Umístìní a pozice
+* Rámeèky
+* Náhledy
+12. Implementace náhledù a potvrzení pøed zaèátkem pøevodu, plus odhad èasu když velké
+13. Testování
+14. Nauèit se paralelní zpracování souboru
+* Producer consumer
+* Dataflow
+15. Implementace paralelního zpracování
+* pro statistiky
+* pro pøevody
+16. Testování
+17. Nauèit se paralelní zpracování souboru
+* Producer consumer
+* Dataflow
+18. Implementace paralelního zpracování
+* pro statistiky
+* pro pøevody
+19. Testování
+20. Pochválit se a oslavit :)
+Ètvrtek
+1. Zkontrolovat plán
+2. Naladit se na vizi mì v IReSoftu, proè to dìlám, vìnování
+3. Testování
+4. Projít kód, doplnit komentáøe, psát si další nápady, vìnování, poslat
+5. Pochválit se a oslavit :)
+
