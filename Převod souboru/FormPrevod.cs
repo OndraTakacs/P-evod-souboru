@@ -26,7 +26,6 @@ namespace Převod_souboru
           set {
                 vstupniSoubor = value;
                 prevod.VstupniSoubor = value;
-                prevod.Kodovani = new StreamReader(value).CurrentEncoding;
                 vstupStatistiky.Soubor = value;
            }
         }
@@ -47,6 +46,7 @@ namespace Převod_souboru
         {
             InitializeComponent();
             prevod = new Prevod();
+            prevod.zmenaStavu += onZmenaStavu;
             vstupStatistiky = new Statistiky();
             vystupStatistiky = new Statistiky();
         }
@@ -56,16 +56,22 @@ namespace Převod_souboru
 
         }
 
+        private void onZmenaStavu(object sender, StavEventArgs e)
+        {
+            progressBar1.Value = e.stav;
+            labelProgress.Text = (e.stav / 10).ToString() + "%";
+        }
+
         private void buttonPreved_Click(object sender, EventArgs e)
         {
             if (vstupniSoubor == null)
             {
-                MessageBox.Show("Vyberte vstupní soubor");
+                MessageBox.Show("Vyberte vstupní soubor", "Upozornění");
                 return;
             }
             if (vystupniSoubor == null)
             {
-                MessageBox.Show("Vyberte výstupní soubor");
+                MessageBox.Show("Vyberte výstupní soubor", "Upozornění");
                 return;
             }
 
@@ -73,6 +79,9 @@ namespace Převod_souboru
             prevod.odstranitDiakritiku = checkBoxDiakritika.Checked;
             prevod.odstranitInterpunkci = checkBoxMezery.Checked;
 
+            progressBar1.Visible = true;
+            labelProgress.Visible = true;
+            prevod.DelkaSouboru = vstupStatistiky.Znaky;
             prevod.preved();
 
             vystupStatistiky.spocitej();
@@ -88,6 +97,7 @@ namespace Převod_souboru
             {
                 VstupniSoubor = openFileDialog1.FileName;
                 labelOtevri.Text = System.IO.Path.GetFileName(VstupniSoubor);
+                labelOtevri.Visible = true;
 
                 vstupStatistiky.spocitej();
                 labelVstupVety.Text = vstupStatistiky.Vety.ToString();
@@ -103,6 +113,7 @@ namespace Převod_souboru
             {
                 VystupniSoubor = saveFileDialog1.FileName;
                 labelUloz.Text = System.IO.Path.GetFileName(VystupniSoubor);
+                labelUloz.Visible = true;
             }
         }
     }

@@ -62,6 +62,8 @@
             this.checkBoxDiakritika = new System.Windows.Forms.CheckBox();
             this.checkBoxRadky = new System.Windows.Forms.CheckBox();
             this.checkBoxMezery = new System.Windows.Forms.CheckBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.labelProgress = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -74,7 +76,7 @@
             // 
             // ButtonOtevri
             // 
-            this.ButtonOtevri.Location = new System.Drawing.Point(49, 30);
+            this.ButtonOtevri.Location = new System.Drawing.Point(41, 40);
             this.ButtonOtevri.Name = "ButtonOtevri";
             this.ButtonOtevri.Size = new System.Drawing.Size(75, 23);
             this.ButtonOtevri.TabIndex = 2;
@@ -84,7 +86,7 @@
             // 
             // buttonUloz
             // 
-            this.buttonUloz.Location = new System.Drawing.Point(446, 30);
+            this.buttonUloz.Location = new System.Drawing.Point(438, 40);
             this.buttonUloz.Name = "buttonUloz";
             this.buttonUloz.Size = new System.Drawing.Size(75, 23);
             this.buttonUloz.TabIndex = 3;
@@ -94,7 +96,7 @@
             // 
             // buttonPreved
             // 
-            this.buttonPreved.Location = new System.Drawing.Point(253, 54);
+            this.buttonPreved.Location = new System.Drawing.Point(245, 64);
             this.buttonPreved.Name = "buttonPreved";
             this.buttonPreved.Size = new System.Drawing.Size(68, 23);
             this.buttonPreved.TabIndex = 4;
@@ -105,36 +107,44 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(46, 0);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label1.Location = new System.Drawing.Point(26, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 13);
+            this.label1.Size = new System.Drawing.Size(111, 16);
             this.label1.TabIndex = 8;
             this.label1.Text = "Vstupní soubor";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(443, 0);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label2.Location = new System.Drawing.Point(419, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 13);
+            this.label2.Size = new System.Drawing.Size(119, 16);
             this.label2.TabIndex = 9;
             this.label2.Text = "Výstupní soubor";
             // 
             // labelOtevri
             // 
             this.labelOtevri.AutoSize = true;
-            this.labelOtevri.Location = new System.Drawing.Point(62, 56);
+            this.labelOtevri.Location = new System.Drawing.Point(54, 66);
             this.labelOtevri.Name = "labelOtevri";
-            this.labelOtevri.Size = new System.Drawing.Size(0, 13);
+            this.labelOtevri.Size = new System.Drawing.Size(75, 13);
             this.labelOtevri.TabIndex = 10;
+            this.labelOtevri.Text = "vstupniSoubor";
+            this.labelOtevri.Visible = false;
             // 
             // labelUloz
             // 
             this.labelUloz.AutoSize = true;
-            this.labelUloz.Location = new System.Drawing.Point(458, 56);
+            this.labelUloz.Location = new System.Drawing.Point(450, 66);
             this.labelUloz.Name = "labelUloz";
-            this.labelUloz.Size = new System.Drawing.Size(0, 13);
+            this.labelUloz.Size = new System.Drawing.Size(80, 13);
             this.labelUloz.TabIndex = 11;
+            this.labelUloz.Text = "vystupniSoubor";
+            this.labelUloz.Visible = false;
             // 
             // label5
             // 
@@ -211,7 +221,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Převod_souboru.Properties.Resources.long_arrow_right1600;
-            this.pictureBox1.Location = new System.Drawing.Point(201, 54);
+            this.pictureBox1.Location = new System.Drawing.Point(193, 64);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(36, 23);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -221,7 +231,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Převod_souboru.Properties.Resources.long_arrow_right1600;
-            this.pictureBox2.Location = new System.Drawing.Point(335, 54);
+            this.pictureBox2.Location = new System.Drawing.Point(327, 64);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(36, 23);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -241,7 +251,7 @@
             this.tableLayoutPanel1.Controls.Add(this.labelVstupSlova, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelVstupZnaky, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.labelVstupRadky, 1, 3);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 83);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 93);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -264,7 +274,7 @@
             this.tableLayoutPanel2.Controls.Add(this.labelVystupSlova, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.labelVystupZnaky, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.labelVystupRadky, 1, 3);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(408, 83);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(400, 93);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 4;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -349,7 +359,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 56);
+            this.label3.Location = new System.Drawing.Point(7, 66);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 13);
             this.label3.TabIndex = 30;
@@ -358,7 +368,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(411, 56);
+            this.label4.Location = new System.Drawing.Point(403, 66);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 13);
             this.label4.TabIndex = 31;
@@ -367,7 +377,7 @@
             // checkBoxDiakritika
             // 
             this.checkBoxDiakritika.AutoSize = true;
-            this.checkBoxDiakritika.Location = new System.Drawing.Point(201, 83);
+            this.checkBoxDiakritika.Location = new System.Drawing.Point(193, 93);
             this.checkBoxDiakritika.Name = "checkBoxDiakritika";
             this.checkBoxDiakritika.Size = new System.Drawing.Size(113, 17);
             this.checkBoxDiakritika.TabIndex = 32;
@@ -377,7 +387,7 @@
             // checkBoxRadky
             // 
             this.checkBoxRadky.AutoSize = true;
-            this.checkBoxRadky.Location = new System.Drawing.Point(201, 102);
+            this.checkBoxRadky.Location = new System.Drawing.Point(193, 112);
             this.checkBoxRadky.Name = "checkBoxRadky";
             this.checkBoxRadky.Size = new System.Drawing.Size(139, 17);
             this.checkBoxRadky.TabIndex = 33;
@@ -387,18 +397,39 @@
             // checkBoxMezery
             // 
             this.checkBoxMezery.AutoSize = true;
-            this.checkBoxMezery.Location = new System.Drawing.Point(201, 125);
+            this.checkBoxMezery.Location = new System.Drawing.Point(193, 133);
             this.checkBoxMezery.Name = "checkBoxMezery";
             this.checkBoxMezery.Size = new System.Drawing.Size(168, 30);
             this.checkBoxMezery.TabIndex = 34;
             this.checkBoxMezery.Text = "Odstranit mezery a interpunkci\r\na použít CamelCase";
             this.checkBoxMezery.UseVisualStyleBackColor = true;
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(193, 35);
+            this.progressBar1.Maximum = 1000;
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(170, 23);
+            this.progressBar1.TabIndex = 35;
+            this.progressBar1.Visible = false;
+            // 
+            // labelProgress
+            // 
+            this.labelProgress.AutoSize = true;
+            this.labelProgress.Location = new System.Drawing.Point(369, 41);
+            this.labelProgress.Name = "labelProgress";
+            this.labelProgress.Size = new System.Drawing.Size(21, 13);
+            this.labelProgress.TabIndex = 36;
+            this.labelProgress.Text = "0%";
+            this.labelProgress.Visible = false;
+            // 
             // FormPrevod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(616, 319);
+            this.ClientSize = new System.Drawing.Size(571, 208);
+            this.Controls.Add(this.labelProgress);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.checkBoxMezery);
             this.Controls.Add(this.checkBoxRadky);
             this.Controls.Add(this.checkBoxDiakritika);
@@ -465,6 +496,8 @@
         private System.Windows.Forms.CheckBox checkBoxDiakritika;
         private System.Windows.Forms.CheckBox checkBoxRadky;
         private System.Windows.Forms.CheckBox checkBoxMezery;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label labelProgress;
     }
 }
 
