@@ -38,6 +38,7 @@ namespace Pøevod_souboru
 
         public void spocitej()
         {
+            reset();
             using (StreamReader sr = new StreamReader(Soubor))
             {
                 string radek;
@@ -50,7 +51,6 @@ namespace Pøevod_souboru
 
                     int i = 0;
                     char c;
-
                     // konec øádku se bere jako bílý znak
                     posledniBily = true;
 
@@ -86,7 +86,7 @@ namespace Pøevod_souboru
 
         private void pripoctiVetu(char c)
         {
-            if (c == '.')
+            if (Interpunkce.jeKonecVety(c))
             {
                 if (!posledniTecka)
                     Vety++;
@@ -94,6 +94,14 @@ namespace Pøevod_souboru
             }
             else
                 posledniTecka = false;
+        }
+
+        private void reset()
+        {
+            Vety = 0;
+            Radky = 0;
+            Slova = 0;
+            Znaky = 0;
         }
 
     }

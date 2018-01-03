@@ -44,7 +44,6 @@
             this.labelVstupSlova = new System.Windows.Forms.Label();
             this.labelVstupZnaky = new System.Windows.Forms.Label();
             this.labelVstupRadky = new System.Windows.Forms.Label();
-            this.checkedListBox = new System.Windows.Forms.CheckedListBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -60,6 +59,9 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.checkBoxDiakritika = new System.Windows.Forms.CheckBox();
+            this.checkBoxRadky = new System.Windows.Forms.CheckBox();
+            this.checkBoxMezery = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -205,18 +207,6 @@
             this.labelVstupRadky.Size = new System.Drawing.Size(13, 13);
             this.labelVstupRadky.TabIndex = 20;
             this.labelVstupRadky.Text = "0";
-            // 
-            // checkedListBox
-            // 
-            this.checkedListBox.FormattingEnabled = true;
-            this.checkedListBox.Items.AddRange(new object[] {
-            "Odstranit diakritiku",
-            "Odstranit řádky",
-            "Odstranit mezery a interpunkci"});
-            this.checkedListBox.Location = new System.Drawing.Point(201, 83);
-            this.checkedListBox.Name = "checkedListBox";
-            this.checkedListBox.Size = new System.Drawing.Size(170, 49);
-            this.checkedListBox.TabIndex = 25;
             // 
             // pictureBox1
             // 
@@ -374,18 +364,50 @@
             this.label4.TabIndex = 31;
             this.label4.Text = "Název:";
             // 
+            // checkBoxDiakritika
+            // 
+            this.checkBoxDiakritika.AutoSize = true;
+            this.checkBoxDiakritika.Location = new System.Drawing.Point(201, 83);
+            this.checkBoxDiakritika.Name = "checkBoxDiakritika";
+            this.checkBoxDiakritika.Size = new System.Drawing.Size(113, 17);
+            this.checkBoxDiakritika.TabIndex = 32;
+            this.checkBoxDiakritika.Text = "Odstranit diakritiku";
+            this.checkBoxDiakritika.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxRadky
+            // 
+            this.checkBoxRadky.AutoSize = true;
+            this.checkBoxRadky.Location = new System.Drawing.Point(201, 102);
+            this.checkBoxRadky.Name = "checkBoxRadky";
+            this.checkBoxRadky.Size = new System.Drawing.Size(139, 17);
+            this.checkBoxRadky.TabIndex = 33;
+            this.checkBoxRadky.Text = "Odstranit prázdné řádky";
+            this.checkBoxRadky.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxMezery
+            // 
+            this.checkBoxMezery.AutoSize = true;
+            this.checkBoxMezery.Location = new System.Drawing.Point(201, 125);
+            this.checkBoxMezery.Name = "checkBoxMezery";
+            this.checkBoxMezery.Size = new System.Drawing.Size(168, 30);
+            this.checkBoxMezery.TabIndex = 34;
+            this.checkBoxMezery.Text = "Odstranit mezery a interpunkci\r\na použít CamelCase";
+            this.checkBoxMezery.UseVisualStyleBackColor = true;
+            // 
             // FormPrevod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(616, 319);
+            this.Controls.Add(this.checkBoxMezery);
+            this.Controls.Add(this.checkBoxRadky);
+            this.Controls.Add(this.checkBoxDiakritika);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.checkedListBox);
             this.Controls.Add(this.labelUloz);
             this.Controls.Add(this.labelOtevri);
             this.Controls.Add(this.label2);
@@ -425,7 +447,6 @@
         private System.Windows.Forms.Label labelVstupSlova;
         private System.Windows.Forms.Label labelVstupZnaky;
         private System.Windows.Forms.Label labelVstupRadky;
-        private System.Windows.Forms.CheckedListBox checkedListBox;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -441,6 +462,9 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox checkBoxDiakritika;
+        private System.Windows.Forms.CheckBox checkBoxRadky;
+        private System.Windows.Forms.CheckBox checkBoxMezery;
     }
 }
 

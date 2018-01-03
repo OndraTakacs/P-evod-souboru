@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Převod_souboru
 {
@@ -25,6 +26,7 @@ namespace Převod_souboru
           set {
                 vstupniSoubor = value;
                 prevod.VstupniSoubor = value;
+                prevod.Kodovani = new StreamReader(value).CurrentEncoding;
                 vstupStatistiky.Soubor = value;
            }
         }
@@ -56,6 +58,21 @@ namespace Převod_souboru
 
         private void buttonPreved_Click(object sender, EventArgs e)
         {
+            if (vstupniSoubor == null)
+            {
+                MessageBox.Show("Vyberte vstupní soubor");
+                return;
+            }
+            if (vystupniSoubor == null)
+            {
+                MessageBox.Show("Vyberte výstupní soubor");
+                return;
+            }
+
+            prevod.odstranitRadky = checkBoxRadky.Checked;
+            prevod.odstranitDiakritiku = checkBoxDiakritika.Checked;
+            prevod.odstranitInterpunkci = checkBoxMezery.Checked;
+
             prevod.preved();
 
             vystupStatistiky.spocitej();
@@ -71,6 +88,7 @@ namespace Převod_souboru
             {
                 VstupniSoubor = openFileDialog1.FileName;
                 labelOtevri.Text = System.IO.Path.GetFileName(VstupniSoubor);
+
                 vstupStatistiky.spocitej();
                 labelVstupVety.Text = vstupStatistiky.Vety.ToString();
                 labelVstupSlova.Text = vstupStatistiky.Slova.ToString();

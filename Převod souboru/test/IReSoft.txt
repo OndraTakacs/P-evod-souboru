@@ -1,101 +1,101 @@
-Cíl: Vypracování úkolu pro pøevod souboru
-Termín: 5.1.2018
-Plán
-1. Nauèit se pracovat v GITHub, základy, vìtve a spojování
-2. Zaloit základní projekt
-3. Nauèit se základy pracování ve WinForms
-4. Vytvoøit základní GUI
-5. Nauèit se základy pracování v C#
-6. Vytvoøit základní tøídu pro pøevod souboru
-* Navrhnout metody a propojit je s GUI, vnitøek prázdnı, Neøešit progress bar
-7. Nauèit se základy práce se soubory v C#
-8. Implementovat statistiky a vytvoøit pro to vìtev
-* Vìty
+CÃ­l: VypracovÃ¡nÃ­ Ãºkolu pro pÅ™evod souboru
+TermÃ­n: 5.1.2018
+PlÃ¡n
+1. NauÄit se pracovat vÂ GITHub, zÃ¡klady, vÄ›tve a spojovÃ¡nÃ­
+2. ZaloÅ¾it zÃ¡kladnÃ­ projekt
+3. NauÄit se zÃ¡klady pracovÃ¡nÃ­ ve WinForms
+4. VytvoÅ™it zÃ¡kladnÃ­ GUI
+5. NauÄit se zÃ¡klady pracovÃ¡nÃ­ vÂ C#
+6. VytvoÅ™it zÃ¡kladnÃ­ tÅ™Ã­du pro pÅ™evod souboru
+* Navrhnout metody a propojit je sÂ GUI, vnitÅ™ek prÃ¡zdnÃ½, NeÅ™eÅ¡it progress bar
+7. NauÄit se zÃ¡klady prÃ¡ce se soubory vÂ C#
+8. Implementovat statistiky a vytvoÅ™it pro to vÄ›tev
+* VÄ›ty
 * Slova
 * Znaky
-* Øádky
-9. Impl. kopírování
-10. Impl. odstranìní diakritiky
-11. Impl. odstranìní prázdnıch øádkù
-12. Impl. Odstranìní mezer a interpunkèních znamének
+* Å˜Ã¡dky
+9. Impl. kopÃ­rovÃ¡nÃ­
+10. Impl. odstranÄ›nÃ­ diakritiky
+11. Impl. odstranÄ›nÃ­ prÃ¡zdnÃ½ch Å™Ã¡dkÅ¯
+12. Impl. OdstranÄ›nÃ­ mezer a interpunkÄnÃ­ch znamÃ©nek
 13. Progress bar
-14. Hezèí GUI
-* Barvy nadpisù
-* Umístìní a pozice
-* Rámeèky
-* Náhledy
-15. Implementace náhledù a potvrzení pøed zaèátkem pøevodu, plus odhad èasu kdy velké
-16. Nauèit se paralelní zpracování souboru
+14. HezÄÃ­ GUI
+* Barvy nadpisÅ¯
+* UmÃ­stÄ›nÃ­ a pozice
+* RÃ¡meÄky
+* NÃ¡hledy
+15. Implementace nÃ¡hledÅ¯ a potvrzenÃ­ pÅ™ed zaÄÃ¡tkem pÅ™evodu, plus odhad Äasu kdyÅ¾ velkÃ©
+16. NauÄit se paralelnÃ­ zpracovÃ¡nÃ­ souboru
 * Producer consumer
 * Dataflow
-17. Implementace paralelního zpracování
+17. Implementace paralelnÃ­ho zpracovÃ¡nÃ­
 * pro statistiky
-* pro pøevody
-18. Testování
-19. Udìlat místo tlaèítek pro pøevod checkboxy s volbami
-20. Projít kód, doplnit komentáøe, psát si další nápady
-Pátek
-1. Vytvoøit plán
-2. Naladit se na vizi mì v IReSoftu, proè to dìlám, vìnování
-3. Nauèit se pracovat v GITHubu, základy, vìtve a spojování
-4. Zaloit základní projekt
-5. Nauèit se základy pracování ve WinForms
-6. Vytvoøit základní GUI
-8. Pochválit se a uít si to :)
+* pro pÅ™evody
+18. TestovÃ¡nÃ­
+19. UdÄ›lat mÃ­sto tlaÄÃ­tek pro pÅ™evod checkboxy s volbami
+20. ProjÃ­t kÃ³d, doplnit komentÃ¡Å™e, psÃ¡t si dalÅ¡Ã­ nÃ¡pady
+PÃ¡tek
+1. VytvoÅ™it plÃ¡n
+2. Naladit se na vizi mÄ› vÂ IReSoftu, proÄ to dÄ›lÃ¡m, vÄ›novÃ¡nÃ­
+3. NauÄit se pracovat vÂ GITHubu, zÃ¡klady, vÄ›tve a spojovÃ¡nÃ­
+4. ZaloÅ¾it zÃ¡kladnÃ­ projekt
+5. NauÄit se zÃ¡klady pracovÃ¡nÃ­ ve WinForms
+6. VytvoÅ™it zÃ¡kladnÃ­ GUI
+8. PochvÃ¡lit se a uÅ¾Ã­t si to :)
 Sobota
-1. Zkontrolovat plán
-2. Vyèlenit si èas a omezit rušení
-3. Naladit se na vizi mì v IReSoftu, proè to dìlám, vìnování
-4. Nauèit se základy pracování v C#
-5. Pochválit se a uít si to :)
-Nedìle
-1. Zkontrolovat plán
-2. Vyèlenit si èas a omezit rušení
-3. Naladit se na vizi mì v IReSoftu, proè to dìlám, vìnování
-4. Vytvoøit základní tøídu pro pøevod souboru
-5. Navrhnout metody a propojit je s GUI, vnitøek prázdnı, Neøešit progress bar
-6. Pochválit se a uít si to :)
-Støeda
-1. Zkontrolovat plán
-2. Naladit se na vizi mì v IReSoftu, proè to dìlám, vìnování
-3. Nauèit se základy práce se soubory v C#
-4. Implementovat statistiky a vytvoøit pro to vìtev
-* Vìty
+1. Zkontrolovat plÃ¡n
+2. VyÄlenit si Äas a omezit ruÅ¡enÃ­
+3. Naladit se na vizi mÄ› vÂ IReSoftu, proÄ to dÄ›lÃ¡m, vÄ›novÃ¡nÃ­
+4. NauÄit se zÃ¡klady pracovÃ¡nÃ­ v C#
+5. PochvÃ¡lit se a uÅ¾Ã­t si to :)
+NedÄ›le
+1. Zkontrolovat plÃ¡n
+2. VyÄlenit si Äas a omezit ruÅ¡enÃ­
+3. Naladit se na vizi mÄ› vÂ IReSoftu, proÄ to dÄ›lÃ¡m, vÄ›novÃ¡nÃ­
+4. VytvoÅ™it zÃ¡kladnÃ­ tÅ™Ã­du pro pÅ™evod souboru
+5. Navrhnout metody a propojit je s GUI, vnitÅ™ek prÃ¡zdnÃ½, NeÅ™eÅ¡it progress bar
+6. PochvÃ¡lit se a uÅ¾Ã­t si to :)
+StÅ™eda
+1. Zkontrolovat plÃ¡n
+2. Naladit se na vizi mÄ› vÂ IReSoftu, proÄ to dÄ›lÃ¡m, vÄ›novÃ¡nÃ­
+3. NauÄit se zÃ¡klady prÃ¡ce se soubory v C#
+4. Implementovat statistiky a vytvoÅ™it pro to vÄ›tev
+* VÄ›ty
 * Slova
 * Znaky
-* Øádky
-5. Impl. kopírování
-6. Impl. odstranìní diakritiky
-7. Impl. odstranìní prázdnıch øádkù
-8. Impl. odstranìní mezer a interpunkèních znamének
+* Å˜Ã¡dky
+5. Impl. kopÃ­rovÃ¡nÃ­
+6. Impl. odstranÄ›nÃ­ diakritiky
+7. Impl. odstranÄ›nÃ­ prÃ¡zdnÃ½ch Å™Ã¡dkÅ¯
+8. Impl. odstranÄ›nÃ­ mezer a interpunkÄnÃ­ch znamÃ©nek
 9. Progress bar
-10. Testování
-11. Hezèí GUI
-* Barvy nadpisù
-* Umístìní a pozice
-* Rámeèky
-* Náhledy
-12. Implementace náhledù a potvrzení pøed zaèátkem pøevodu, plus odhad èasu kdy velké
-13. Testování
-14. Nauèit se paralelní zpracování souboru
+10. TestovÃ¡nÃ­
+11. HezÄÃ­ GUI
+* Barvy nadpisÅ¯
+* UmÃ­stÄ›nÃ­ a pozice
+* RÃ¡meÄky
+* NÃ¡hledy
+12. Implementace nÃ¡hledÅ¯ a potvrzenÃ­ pÅ™ed zaÄÃ¡tkem pÅ™evodu, plus odhad Äasu kdyÅ¾ velkÃ©
+13. TestovÃ¡nÃ­
+14. NauÄit se paralelnÃ­ zpracovÃ¡nÃ­ souboru
 * Producer consumer
 * Dataflow
-15. Implementace paralelního zpracování
+15. Implementace paralelnÃ­ho zpracovÃ¡nÃ­
 * pro statistiky
-* pro pøevody
-16. Testování
-17. Nauèit se paralelní zpracování souboru
+* pro pÅ™evody
+16. TestovÃ¡nÃ­
+17. NauÄit se paralelnÃ­ zpracovÃ¡nÃ­ souboru
 * Producer consumer
 * Dataflow
-18. Implementace paralelního zpracování
+18. Implementace paralelnÃ­ho zpracovÃ¡nÃ­
 * pro statistiky
-* pro pøevody
-19. Testování
-20. Pochválit se a oslavit :)
-Ètvrtek
-1. Zkontrolovat plán
-2. Naladit se na vizi mì v IReSoftu, proè to dìlám, vìnování
-3. Testování
-4. Projít kód, doplnit komentáøe, psát si další nápady, vìnování, poslat
-5. Pochválit se a oslavit :)
+* pro pÅ™evody
+19. TestovÃ¡nÃ­
+20. PochvÃ¡lit se a oslavit :)
+ÄŒtvrtek
+1. Zkontrolovat plÃ¡n
+2. Naladit se na vizi mÄ› vÂ IReSoftu, proÄ to dÄ›lÃ¡m, vÄ›novÃ¡nÃ­
+3. TestovÃ¡nÃ­
+4. ProjÃ­t kÃ³d, doplnit komentÃ¡Å™e, psÃ¡t si dalÅ¡Ã­ nÃ¡pady, vÄ›novÃ¡nÃ­, poslat
+5. PochvÃ¡lit se a oslavit :)
 

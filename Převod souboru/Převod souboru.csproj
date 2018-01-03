@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interpunkce.cs" />
+    <Compile Include="Diakritika.cs" />
     <Compile Include="FormPrevod.cs">
       <SubType>Form</SubType>
     </Compile>
