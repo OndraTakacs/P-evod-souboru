@@ -79,13 +79,16 @@ namespace Pøevod_souboru
                 using (StreamWriter sw = new StreamWriter(new FileStream(VystupniSoubor, FileMode.Create), Kodovani))
                 {
                     string radek;
+                    string novyRadekString;
                     long stavZvysen = 0;
                     while ((radek = sr.ReadLine()) != null)
                     {
-                        string novyRadek = "";
+                        // použití pole znakù pro vìtší efektivitu
+                        char[] novyRadek = new char[radek.Length];
                         if (odstranitDiakritiku || odstranitInterpunkci)
                         {
                             int i = 0;
+                            int j = 0;
                             char c;
                             char novy;
 
@@ -95,7 +98,8 @@ namespace Pøevod_souboru
                                 novy = camelCase(c);
                                 if (!odstranDiakritiku(c) && !odstranMezeryInterpunkci(c))
                                 {
-                                    novyRadek += novy;
+                                    novyRadek[j] = novy;
+                                    j++;
                                 }
                                 i++;
 
@@ -119,6 +123,7 @@ namespace Pøevod_souboru
                                     return nahled + novyRadek;
                                 }
                             }
+                            novyRadekString = new string(novyRadek);
 
                             // navrácení stavu na pùvodní hodnotu, aby se vyrovnalo druhé zvýšení na konci øádku
                             if (stavZvysen > 0)
@@ -127,19 +132,19 @@ namespace Pøevod_souboru
                             }
                         }
                         else
-                            novyRadek = radek;
+                            novyRadekString = radek;
 
-                        if (!odstranPrazdnyRadek(novyRadek))
+                        if (!odstranPrazdnyRadek(novyRadekString))
                         {
                             if (sr.Peek() == -1)
                             {
-                                sw.Write(novyRadek);
+                                sw.Write(novyRadekString);
                             }
                             else
-                                sw.WriteLine(novyRadek);
+                                sw.WriteLine(novyRadekString);
 
                             if (maxRadku > -1) { 
-                                nahled += novyRadek + System.Environment.NewLine;
+                                nahled += novyRadekString + System.Environment.NewLine;
                             }
                             radku++;
                         }
