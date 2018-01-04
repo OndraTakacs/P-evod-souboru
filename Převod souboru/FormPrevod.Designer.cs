@@ -68,6 +68,11 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.textBoxNahledVystup = new System.Windows.Forms.TextBox();
+            this.backgroundWorkerPreved = new System.ComponentModel.BackgroundWorker();
+            this.buttonZrusit = new System.Windows.Forms.Button();
+            this.labelStav = new System.Windows.Forms.Label();
+            this.backgroundWorkerStatistikyVstup = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerStatistikyVystup = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -100,9 +105,9 @@
             // 
             // buttonPreved
             // 
-            this.buttonPreved.Location = new System.Drawing.Point(314, 86);
+            this.buttonPreved.Location = new System.Drawing.Point(286, 135);
             this.buttonPreved.Name = "buttonPreved";
-            this.buttonPreved.Size = new System.Drawing.Size(68, 23);
+            this.buttonPreved.Size = new System.Drawing.Size(53, 23);
             this.buttonPreved.TabIndex = 4;
             this.buttonPreved.Text = "Převeď";
             this.buttonPreved.UseVisualStyleBackColor = true;
@@ -170,7 +175,7 @@
             // 
             this.labelVstupVety.AutoSize = true;
             this.labelVstupVety.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelVstupVety.Location = new System.Drawing.Point(79, 0);
+            this.labelVstupVety.Location = new System.Drawing.Point(81, 0);
             this.labelVstupVety.Name = "labelVstupVety";
             this.labelVstupVety.Size = new System.Drawing.Size(14, 13);
             this.labelVstupVety.TabIndex = 20;
@@ -180,7 +185,7 @@
             // 
             this.labelVstupSlova.AutoSize = true;
             this.labelVstupSlova.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelVstupSlova.Location = new System.Drawing.Point(79, 24);
+            this.labelVstupSlova.Location = new System.Drawing.Point(81, 24);
             this.labelVstupSlova.Name = "labelVstupSlova";
             this.labelVstupSlova.Size = new System.Drawing.Size(14, 13);
             this.labelVstupSlova.TabIndex = 20;
@@ -190,7 +195,7 @@
             // 
             this.labelVstupZnaky.AutoSize = true;
             this.labelVstupZnaky.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelVstupZnaky.Location = new System.Drawing.Point(79, 48);
+            this.labelVstupZnaky.Location = new System.Drawing.Point(81, 48);
             this.labelVstupZnaky.Name = "labelVstupZnaky";
             this.labelVstupZnaky.Size = new System.Drawing.Size(14, 13);
             this.labelVstupZnaky.TabIndex = 20;
@@ -200,7 +205,7 @@
             // 
             this.labelVstupRadky.AutoSize = true;
             this.labelVstupRadky.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelVstupRadky.Location = new System.Drawing.Point(79, 74);
+            this.labelVstupRadky.Location = new System.Drawing.Point(81, 74);
             this.labelVstupRadky.Name = "labelVstupRadky";
             this.labelVstupRadky.Size = new System.Drawing.Size(14, 13);
             this.labelVstupRadky.TabIndex = 20;
@@ -209,7 +214,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Převod_souboru.Properties.Resources.long_arrow_right1600;
-            this.pictureBox1.Location = new System.Drawing.Point(262, 86);
+            this.pictureBox1.Location = new System.Drawing.Point(244, 135);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(36, 23);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -219,7 +224,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Převod_souboru.Properties.Resources.long_arrow_right1600;
-            this.pictureBox2.Location = new System.Drawing.Point(396, 86);
+            this.pictureBox2.Location = new System.Drawing.Point(418, 135);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(36, 23);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -229,8 +234,8 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.33333F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.66667F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.32058F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.67942F));
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 3);
@@ -246,14 +251,14 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(150, 100);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(209, 100);
             this.tableLayoutPanel1.TabIndex = 28;
             // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.66667F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.95745F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.04255F));
             this.tableLayoutPanel2.Controls.Add(this.label21, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label22, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label23, 0, 2);
@@ -269,7 +274,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(150, 100);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(188, 100);
             this.tableLayoutPanel2.TabIndex = 29;
             // 
             // label21
@@ -312,7 +317,7 @@
             // 
             this.labelVystupVety.AutoSize = true;
             this.labelVystupVety.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelVystupVety.Location = new System.Drawing.Point(82, 0);
+            this.labelVystupVety.Location = new System.Drawing.Point(80, 0);
             this.labelVystupVety.Name = "labelVystupVety";
             this.labelVystupVety.Size = new System.Drawing.Size(14, 13);
             this.labelVystupVety.TabIndex = 20;
@@ -322,7 +327,7 @@
             // 
             this.labelVystupSlova.AutoSize = true;
             this.labelVystupSlova.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelVystupSlova.Location = new System.Drawing.Point(82, 24);
+            this.labelVystupSlova.Location = new System.Drawing.Point(80, 24);
             this.labelVystupSlova.Name = "labelVystupSlova";
             this.labelVystupSlova.Size = new System.Drawing.Size(14, 13);
             this.labelVystupSlova.TabIndex = 20;
@@ -332,7 +337,7 @@
             // 
             this.labelVystupZnaky.AutoSize = true;
             this.labelVystupZnaky.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelVystupZnaky.Location = new System.Drawing.Point(82, 48);
+            this.labelVystupZnaky.Location = new System.Drawing.Point(80, 48);
             this.labelVystupZnaky.Name = "labelVystupZnaky";
             this.labelVystupZnaky.Size = new System.Drawing.Size(14, 13);
             this.labelVystupZnaky.TabIndex = 20;
@@ -342,7 +347,7 @@
             // 
             this.labelVystupRadky.AutoSize = true;
             this.labelVystupRadky.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelVystupRadky.Location = new System.Drawing.Point(82, 74);
+            this.labelVystupRadky.Location = new System.Drawing.Point(80, 74);
             this.labelVystupRadky.Name = "labelVystupRadky";
             this.labelVystupRadky.Size = new System.Drawing.Size(14, 13);
             this.labelVystupRadky.TabIndex = 20;
@@ -369,7 +374,7 @@
             // checkBoxDiakritika
             // 
             this.checkBoxDiakritika.AutoSize = true;
-            this.checkBoxDiakritika.Location = new System.Drawing.Point(262, 115);
+            this.checkBoxDiakritika.Location = new System.Drawing.Point(262, 164);
             this.checkBoxDiakritika.Name = "checkBoxDiakritika";
             this.checkBoxDiakritika.Size = new System.Drawing.Size(113, 17);
             this.checkBoxDiakritika.TabIndex = 32;
@@ -380,7 +385,7 @@
             // checkBoxRadky
             // 
             this.checkBoxRadky.AutoSize = true;
-            this.checkBoxRadky.Location = new System.Drawing.Point(262, 134);
+            this.checkBoxRadky.Location = new System.Drawing.Point(262, 183);
             this.checkBoxRadky.Name = "checkBoxRadky";
             this.checkBoxRadky.Size = new System.Drawing.Size(139, 17);
             this.checkBoxRadky.TabIndex = 33;
@@ -391,7 +396,7 @@
             // checkBoxMezery
             // 
             this.checkBoxMezery.AutoSize = true;
-            this.checkBoxMezery.Location = new System.Drawing.Point(262, 155);
+            this.checkBoxMezery.Location = new System.Drawing.Point(262, 204);
             this.checkBoxMezery.Name = "checkBoxMezery";
             this.checkBoxMezery.Size = new System.Drawing.Size(168, 30);
             this.checkBoxMezery.TabIndex = 34;
@@ -401,25 +406,24 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(262, 57);
+            this.progressBar1.Location = new System.Drawing.Point(244, 106);
             this.progressBar1.Maximum = 1000;
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(170, 23);
+            this.progressBar1.Size = new System.Drawing.Size(210, 23);
             this.progressBar1.TabIndex = 35;
-            this.progressBar1.Visible = false;
             // 
             // labelProgress
             // 
             this.labelProgress.AutoSize = true;
-            this.labelProgress.Location = new System.Drawing.Point(335, 41);
+            this.labelProgress.Location = new System.Drawing.Point(339, 110);
             this.labelProgress.Name = "labelProgress";
             this.labelProgress.Size = new System.Drawing.Size(21, 13);
             this.labelProgress.TabIndex = 36;
             this.labelProgress.Text = "0%";
-            this.labelProgress.Visible = false;
             // 
             // textBoxVstup
             // 
+            this.textBoxVstup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBoxVstup.Location = new System.Drawing.Point(57, 208);
             this.textBoxVstup.Name = "textBoxVstup";
             this.textBoxVstup.ReadOnly = true;
@@ -428,6 +432,7 @@
             // 
             // textBoxVystup
             // 
+            this.textBoxVystup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBoxVystup.Location = new System.Drawing.Point(505, 208);
             this.textBoxVystup.Name = "textBoxVystup";
             this.textBoxVystup.ReadOnly = true;
@@ -470,18 +475,63 @@
             this.textBoxNahledVystup.Size = new System.Drawing.Size(226, 143);
             this.textBoxNahledVystup.TabIndex = 42;
             // 
+            // backgroundWorkerPreved
+            // 
+            this.backgroundWorkerPreved.WorkerReportsProgress = true;
+            this.backgroundWorkerPreved.WorkerSupportsCancellation = true;
+            this.backgroundWorkerPreved.DoWork += new System.ComponentModel.DoWorkEventHandler(this.prevedDoWork);
+            this.backgroundWorkerPreved.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.prevedProgressChanged);
+            this.backgroundWorkerPreved.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.prevedRunWorkerCompleted);
+            // 
+            // buttonZrusit
+            // 
+            this.buttonZrusit.Location = new System.Drawing.Point(355, 135);
+            this.buttonZrusit.Name = "buttonZrusit";
+            this.buttonZrusit.Size = new System.Drawing.Size(57, 23);
+            this.buttonZrusit.TabIndex = 44;
+            this.buttonZrusit.Text = "Zrušit";
+            this.buttonZrusit.UseVisualStyleBackColor = true;
+            this.buttonZrusit.Click += new System.EventHandler(this.buttonZrusit_Click);
+            // 
+            // labelStav
+            // 
+            this.labelStav.AutoSize = true;
+            this.labelStav.Location = new System.Drawing.Point(241, 90);
+            this.labelStav.Name = "labelStav";
+            this.labelStav.Size = new System.Drawing.Size(101, 13);
+            this.labelStav.TabIndex = 45;
+            this.labelStav.Text = "Čekám na instrukce";
+            // 
+            // backgroundWorkerStatistikyVstup
+            // 
+            this.backgroundWorkerStatistikyVstup.WorkerReportsProgress = true;
+            this.backgroundWorkerStatistikyVstup.WorkerSupportsCancellation = true;
+            this.backgroundWorkerStatistikyVstup.DoWork += new System.ComponentModel.DoWorkEventHandler(this.statistikyVstupDoWork);
+            this.backgroundWorkerStatistikyVstup.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.prevedProgressChanged);
+            this.backgroundWorkerStatistikyVstup.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.statistikyVstupRunWorkerCompleted);
+            // 
+            // backgroundWorkerStatistikyVystup
+            // 
+            this.backgroundWorkerStatistikyVystup.WorkerReportsProgress = true;
+            this.backgroundWorkerStatistikyVystup.WorkerSupportsCancellation = true;
+            this.backgroundWorkerStatistikyVystup.DoWork += new System.ComponentModel.DoWorkEventHandler(this.statistikyVystupDoWork);
+            this.backgroundWorkerStatistikyVystup.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.prevedProgressChanged);
+            this.backgroundWorkerStatistikyVystup.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.statistikyVystupRunWorkerCompleted);
+            // 
             // FormPrevod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(697, 346);
+            this.Controls.Add(this.labelProgress);
+            this.Controls.Add(this.labelStav);
+            this.Controls.Add(this.buttonZrusit);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.textBoxNahledVystup);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.textBoxNahledVstup);
             this.Controls.Add(this.textBoxVystup);
             this.Controls.Add(this.textBoxVstup);
-            this.Controls.Add(this.labelProgress);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.checkBoxMezery);
             this.Controls.Add(this.checkBoxRadky);
@@ -553,6 +603,11 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBoxNahledVystup;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerPreved;
+        private System.Windows.Forms.Button buttonZrusit;
+        private System.Windows.Forms.Label labelStav;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerStatistikyVstup;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerStatistikyVystup;
     }
 }
 

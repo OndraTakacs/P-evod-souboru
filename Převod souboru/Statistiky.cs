@@ -1,11 +1,14 @@
 using System;
 using System.IO;
+using System.ComponentModel;
 
 namespace Pøevod_souboru
 {
     public class Statistiky
     {
         public string Soubor { get; set; }
+
+        public long DelkaSouboru { get; set; }
 
         // poèet posloupností znakù, vèetnì bílých, oddìlených teèkou
         // nìkolik teèek za sebou se poèítá jako jedno ukonèení vìty, ne nìkolik vìt
@@ -36,9 +39,16 @@ namespace Pøevod_souboru
         // byl poslední znak teèka?
         private bool posledniTecka = true;
 
-        public void spocitej()
+        public void spocitej(object sender, DoWorkEventArgs e)
         {
+            FileInfo info = new FileInfo(Soubor);
+            DelkaSouboru = info.Length;
+
+            BackgroundWorker worker = sender as BackgroundWorker;
             reset();
+            long stav = 0;
+            int staraProcenta = 0;
+
             using (StreamReader sr = new StreamReader(Soubor))
             {
                 string radek;
@@ -62,6 +72,20 @@ namespace Pøevod_souboru
                         pripoctiVetu(c);
 
                         i++;
+                    }
+
+                    stav += radek.Length + 4;
+                    int procenta = (int)(1000 * stav / DelkaSouboru);
+                    if (procenta - staraProcenta > 0)
+                    {
+                        staraProcenta = procenta;
+                        worker.ReportProgress(procenta);
+                    }
+
+                    if (worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        break;
                     }
                 }
             }

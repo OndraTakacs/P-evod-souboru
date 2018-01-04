@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.ComponentModel;
 
 namespace Pøevod_souboru
 {
@@ -8,7 +9,7 @@ namespace Pøevod_souboru
     {
         private string vstupniSoubor;
         public string VstupniSoubor {
-            private get
+            get
             {
                 return vstupniSoubor;
             }
@@ -37,12 +38,16 @@ namespace Pøevod_souboru
                 if (procenta - staraProcenta > 0)
                 {
                     staraProcenta = procenta;
-                    onZmenaStavu(new StavEventArgs(procenta));
+                    if (worker != null)
+                    {
+                        worker.ReportProgress(procenta);
+                    }
                 }
             }
         }
 
         private int staraProcenta = 0;
+        private BackgroundWorker worker;
 
         public event EventHandler<StavEventArgs> zmenaStavu;
         protected virtual void onZmenaStavu(StavEventArgs e)
@@ -62,16 +67,19 @@ namespace Pøevod_souboru
         private bool posledniBilyInterpunkce = false;
 
 
-        public string preved(int maxRadku = -1)
+        public string preved(int maxRadku = -1, object sender = null, DoWorkEventArgs e = null)
         {
             string nahled = "";
             int radku = 0;
             reset();
+
+            worker = sender as BackgroundWorker;
             using (StreamReader sr = new StreamReader(VstupniSoubor))
             {
                 using (StreamWriter sw = new StreamWriter(new FileStream(VystupniSoubor, FileMode.Create), Kodovani))
                 {
                     string radek;
+                    long stavZvysen = 0;
                     while ((radek = sr.ReadLine()) != null)
                     {
                         string novyRadek = "";
@@ -90,6 +98,32 @@ namespace Pøevod_souboru
                                     novyRadek += novy;
                                 }
                                 i++;
+
+                                // poøítání prùbìžného stavu zpracování
+                                if (i % 10000 == 0)
+                                {
+                                    Stav += 10000;
+                                    stavZvysen += 10000;
+                                }
+                                
+
+                                if (worker != null && worker.CancellationPending)
+                                {
+                                    e.Cancel = true;
+                                    return nahled;
+                                }
+
+                                // ošetøení náhledu pøi velmi dlouhém øádku
+                                if (maxRadku > -1 && radek.Length > 1000)
+                                {
+                                    return nahled + novyRadek;
+                                }
+                            }
+
+                            // navrácení stavu na pùvodní hodnotu, aby se vyrovnalo druhé zvýšení na konci øádku
+                            if (stavZvysen > 0)
+                            {
+                                stav -= stavZvysen;
                             }
                         }
                         else
@@ -104,7 +138,9 @@ namespace Pøevod_souboru
                             else
                                 sw.WriteLine(novyRadek);
 
-                            nahled += novyRadek + System.Environment.NewLine;
+                            if (maxRadku > -1) { 
+                                nahled += novyRadek + System.Environment.NewLine;
+                            }
                             radku++;
                         }
 
@@ -117,7 +153,6 @@ namespace Pøevod_souboru
                     }
                 }
             }
-            Stav = DelkaSouboru;
             return nahled;
         }
 

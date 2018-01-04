@@ -61,11 +61,12 @@ namespace Převod_souboru
         {
             progressBar1.Value = e.stav;
             labelProgress.Text = (e.stav / 10).ToString() + "%";
+            labelProgress.Refresh();
         }
 
         private void buttonPreved_Click(object sender, EventArgs e)
         {
-            if (!kontrolaSouboru(true))
+            if (!kontrolaSouboru(true) || backgroundWorkerPreved.IsBusy)
                 return;
 
             progressBar1.Visible = true;
@@ -73,14 +74,10 @@ namespace Převod_souboru
             prevod.DelkaSouboru = vstupStatistiky.Znaky;
 
             uzamkni();
-            prevod.preved();
-            odemkni();
-
-            vystupStatistiky.spocitej();
-            labelVystupVety.Text = vystupStatistiky.Vety.ToString();
-            labelVystupSlova.Text = vystupStatistiky.Slova.ToString();
-            labelVystupRadky.Text = vystupStatistiky.Radky.ToString();
-            labelVystupZnaky.Text = vystupStatistiky.Znaky.ToString();
+            labelStav.Text = "Převádím soubor";
+            progressBar1.Value = 0;
+            labelProgress.Text = "0%";
+            backgroundWorkerPreved.RunWorkerAsync();
         }
 
         private void ButtonOtevri_Click(object sender, EventArgs e)
@@ -94,11 +91,11 @@ namespace Převod_souboru
                 if (kontrolaSouboru(false))
                     textBoxNahledVystup.Text = prevod.preved(10);
 
-                vstupStatistiky.spocitej();
-                labelVstupVety.Text = vstupStatistiky.Vety.ToString();
-                labelVstupSlova.Text = vstupStatistiky.Slova.ToString();
-                labelVstupRadky.Text = vstupStatistiky.Radky.ToString();
-                labelVstupZnaky.Text = vstupStatistiky.Znaky.ToString();
+                uzamkni();
+                labelStav.Text = "Počítám statistiky vstupního souboru";
+                progressBar1.Value = 0;
+                labelProgress.Text = "0%";
+                backgroundWorkerStatistikyVstup.RunWorkerAsync();
             }
         }
 
@@ -172,6 +169,7 @@ namespace Převod_souboru
 
         private void uzamkni()
         {
+            buttonPreved.Enabled = false;
             ButtonOtevri.Enabled = false;
             ButtonUloz.Enabled = false;
             checkBoxDiakritika.Enabled = false;
@@ -182,11 +180,118 @@ namespace Převod_souboru
 
         private void odemkni()
         {
+            buttonPreved.Enabled = true;
             ButtonOtevri.Enabled = true;
             ButtonUloz.Enabled = true;
             checkBoxDiakritika.Enabled = true;
             checkBoxMezery.Enabled = true;
             checkBoxRadky.Enabled = true;
+        }
+
+        private void buttonZrusit_Click(object sender, EventArgs e)
+        {
+            backgroundWorkerPreved.CancelAsync();
+            backgroundWorkerStatistikyVstup.CancelAsync();
+            backgroundWorkerStatistikyVystup.CancelAsync();
+        }
+
+        private void prevedDoWork(object sender, DoWorkEventArgs e)
+        {
+            prevod.preved(-1, sender, e);
+        }
+
+        private void prevedProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            try
+            {
+                progressBar1.Value = e.ProgressPercentage;
+                labelProgress.Text = (e.ProgressPercentage / 10).ToString() + "%";
+            }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                progressBar1.Value = 1000;
+                labelProgress.Text = "100%";
+            }
+            labelProgress.Refresh();
+        }
+
+        private void prevedRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled == true)
+            {
+                labelStav.Text = "Převod zrušen";
+                odemkni();
+            }
+            else if (e.Error != null)
+            {
+                labelStav.Text = "Chyba při převodu: " + e.Error.Message;
+                odemkni();
+            }
+            else
+            {
+                labelStav.Text = "Převod dokončen. Počítám výstupní statistiky";
+                progressBar1.Value = 0;
+                labelProgress.Text = "0%";
+                backgroundWorkerStatistikyVystup.RunWorkerAsync();
+            }
+        }
+
+        private void statistikyVstupDoWork(object sender, DoWorkEventArgs e)
+        {
+            vstupStatistiky.spocitej(sender, e);
+        }
+
+        private void statistikyVstupRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            odemkni();
+            if (e.Cancelled == true)
+            {
+                labelStav.Text = "Výpočet vstupních statistik zrušen";
+            }
+            else if (e.Error != null)
+            {
+                labelStav.Text = "Chyba při výpočetu vstupních statistik: " + e.Error.Message;
+            }
+            else
+            {
+                labelStav.Text = "Výpočet vstupních statistik dokončen";
+                labelProgress.Text = "100%";
+                progressBar1.Value = 1000;
+
+                labelVstupVety.Text = vstupStatistiky.Vety.ToString();
+                labelVstupSlova.Text = vstupStatistiky.Slova.ToString();
+                labelVstupRadky.Text = vstupStatistiky.Radky.ToString();
+                labelVstupZnaky.Text = vstupStatistiky.Znaky.ToString();
+            }
+        }
+
+        private void statistikyVystupDoWork(object sender, DoWorkEventArgs e)
+        {
+            vystupStatistiky.spocitej(sender, e);
+        }
+
+        private void statistikyVystupRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            odemkni();
+            if (e.Cancelled == true)
+            {
+                labelStav.Text = "Výpočet výstupních statistik zrušen";
+            }
+            else if (e.Error != null)
+            {
+                labelStav.Text = "Chyba při výpočetu výstupních statistik: " + e.Error.Message;
+            }
+            else
+            {
+                labelStav.Text = "Výpočet výstupních statistik dokončen";
+                labelProgress.Text = "100%";
+                progressBar1.Value = 1000;
+
+                labelVystupVety.Text = vystupStatistiky.Vety.ToString();
+                labelVystupSlova.Text = vystupStatistiky.Slova.ToString();
+                labelVystupRadky.Text = vystupStatistiky.Radky.ToString();
+                labelVystupZnaky.Text = vystupStatistiky.Znaky.ToString();
+            }
         }
     }
 }
