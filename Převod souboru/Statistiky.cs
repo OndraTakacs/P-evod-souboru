@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.IO;
 using System.ComponentModel;
 
@@ -47,7 +48,7 @@ namespace Pøevod_souboru
             BackgroundWorker worker = sender as BackgroundWorker;
             reset();
             long stav = 0;
-            int staraProcenta = 0;
+            int starePromile = 0;
 
             using (StreamReader sr = new StreamReader(Soubor))
             {
@@ -68,56 +69,56 @@ namespace Pøevod_souboru
                     {
                         c = radek[i];
 
-                        pripoctiSlovo(c);
-                        pripoctiVetu(c);
+                        #region pøipoèti slovo
+                        if (char.IsWhiteSpace(c))
+                        {
+                            posledniBily = true;
+                        }
+                        // naètený znak
+                        else
+                        {
+                            // byl naèten znak a znak pøed ním byl bílý, takže se jedná o nové slovo
+                            if (posledniBily == true)
+                                Slova++;
+
+                            posledniBily = false;
+                        }
+                        #endregion
+
+                        #region pøipoèti vìtu
+                        if (Interpunkce.konecVety.Contains(c))
+                        {
+                            if (!posledniTecka)
+                                Vety++;
+                            posledniTecka = true;
+                        }
+                        else
+                            posledniTecka = false;
+                        #endregion
 
                         i++;
                     }
 
                     stav += radek.Length + 4;
-                    int procenta = (int)(1000 * stav / DelkaSouboru);
-                    if (procenta - staraProcenta > 0)
+                    int promile = (int)(1000 * stav / DelkaSouboru);
+                    if (promile > 1000)
                     {
-                        staraProcenta = procenta;
-                        worker.ReportProgress(procenta);
+                        promile = 1000;
+                    }
+                    if (promile - starePromile > 0)
+                    {
+                        starePromile = promile;
+                        worker.ReportProgress(promile);
                     }
 
                     if (worker.CancellationPending)
                     {
+                        Znaky = DelkaSouboru;
                         e.Cancel = true;
                         break;
                     }
                 }
             }
-        }
-
-        private void pripoctiSlovo(char c)
-        {
-            if (char.IsWhiteSpace(c))
-            {
-                posledniBily = true;
-            }
-            // naètený znak
-            else
-            {
-                // byl naèten znak a znak pøed ním byl bílý, takže se jedná o nové slovo
-                if (posledniBily == true)
-                    Slova++;
-
-                posledniBily = false;
-            }
-        }
-
-        private void pripoctiVetu(char c)
-        {
-            if (Interpunkce.jeKonecVety(c))
-            {
-                if (!posledniTecka)
-                    Vety++;
-                posledniTecka = true;
-            }
-            else
-                posledniTecka = false;
         }
 
         private void reset()

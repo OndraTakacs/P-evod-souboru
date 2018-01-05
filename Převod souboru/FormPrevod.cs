@@ -88,8 +88,7 @@ namespace Převod_souboru
                 textBoxVstup.Text = System.IO.Path.GetFileName(VstupniSoubor);
 
                 textBoxNahledVstup.Text = vratNahled(VstupniSoubor, 10);
-                if (kontrolaSouboru(false))
-                    textBoxNahledVystup.Text = prevod.preved(10);
+                zobrazVystupNahled();
 
                 uzamkni();
                 labelStav.Text = "Počítám statistiky vstupního souboru";
@@ -125,29 +124,27 @@ namespace Převod_souboru
 
         private void zobrazVystupNahled()
         {
-            textBoxNahledVystup.Text = prevod.preved(10);
+            if (VstupniSoubor != null)
+                textBoxNahledVystup.Text = prevod.preved(10);
         }
 
         private void checkBoxDiakritika_CheckedChanged(object sender, EventArgs e)
         {
             prevod.odstranitDiakritiku = checkBoxDiakritika.Checked;
 
-            if (kontrolaSouboru(false))
-                zobrazVystupNahled();
+            zobrazVystupNahled();
         }
 
         private void checkBoxRadky_CheckedChanged(object sender, EventArgs e)
         {
             prevod.odstranitRadky = checkBoxRadky.Checked;
-            if (kontrolaSouboru(false))
-                zobrazVystupNahled();
+            zobrazVystupNahled();
         }
 
         private void checkBoxMezery_CheckedChanged(object sender, EventArgs e)
         {
             prevod.odstranitInterpunkci = checkBoxMezery.Checked;
-            if (kontrolaSouboru(false))
-                zobrazVystupNahled();
+            zobrazVystupNahled();
         }
 
         private bool kontrolaSouboru(bool upozorneni)

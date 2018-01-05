@@ -8,8 +8,8 @@ namespace Převod_souboru
 {
     class Interpunkce
     {
-        private static char[] interpunkce = { '.', '?', '!', ',', ';', ':', '-', '\"', '\'', '/', '(', ')', '[', ']', '{', '}', '<', '>'};
-        private static char[] konecVety = { '.', '?', '!' };
+        public static char[] interpunkce = { '.', '?', '!', ',', ';', ':', '-', '\"', '\'', '/', '(', ')', '[', ']', '{', '}', '<', '>'};
+        public static char[] konecVety = { '.', '?', '!' };
 
         public static bool jeKonecVety(char c)
         {
@@ -18,7 +18,7 @@ namespace Převod_souboru
             return false;
         }
 
-        public static bool jeInterpunkce(char c)
+        public static bool jjeInterpunkce(char c)
         {
             if (interpunkce.Contains(c))
                 return true;

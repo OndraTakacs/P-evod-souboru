@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.ComponentModel;
+using System.Linq;
 
 namespace Pøevod_souboru
 {
@@ -34,19 +35,23 @@ namespace Pøevod_souboru
             private set
             {
                 stav = value;
-                int procenta = (int)(1000 * value / DelkaSouboru);
-                if (procenta - staraProcenta > 0)
+                int promile = (int)(1000 * value / DelkaSouboru);
+                if (promile > 1000)
                 {
-                    staraProcenta = procenta;
+                    promile = 1000;
+                }
+                if (promile - starePromile > 0)
+                {
+                    starePromile = promile;
                     if (worker != null)
                     {
-                        worker.ReportProgress(procenta);
+                        worker.ReportProgress(promile);
                     }
                 }
             }
         }
 
-        private int staraProcenta = 0;
+        private int starePromile = 0;
         private BackgroundWorker worker;
 
         public event EventHandler<StavEventArgs> zmenaStavu;
@@ -66,6 +71,11 @@ namespace Pøevod_souboru
 
         private bool posledniBilyInterpunkce = false;
 
+        // poèet znakù po kterém se aktualizuje stav zpracování
+        private static int krokZpracovani = 5000;
+
+        private static int jeNahled = -1;
+
 
         public string preved(int maxRadku = -1, object sender = null, DoWorkEventArgs e = null)
         {
@@ -74,67 +84,111 @@ namespace Pøevod_souboru
             reset();
 
             worker = sender as BackgroundWorker;
+            StreamWriter sw = null;
             using (StreamReader sr = new StreamReader(VstupniSoubor))
             {
-                using (StreamWriter sw = new StreamWriter(new FileStream(VystupniSoubor, FileMode.Create), Kodovani))
+                if (!(maxRadku > jeNahled))
                 {
-                    string radek;
-                    string novyRadekString;
+                    sw = new StreamWriter(new FileStream(VystupniSoubor, FileMode.Create), Kodovani);
+                }
+                string radek;
+                string novyRadekString = "";
+                while ((radek = sr.ReadLine()) != null)
+                {
+                    // udává o kolik byl zvýšen prùbìžný stav zpracování
                     long stavZvysen = 0;
-                    while ((radek = sr.ReadLine()) != null)
+                    // použití pole znakù pro vìtší efektivitu
+                    char[] novyRadek = new char[radek.Length];
+                    if (odstranitDiakritiku || odstranitInterpunkci)
                     {
-                        // použití pole znakù pro vìtší efektivitu
-                        char[] novyRadek = new char[radek.Length];
-                        if (odstranitDiakritiku || odstranitInterpunkci)
+                        int i = 0;
+                        int j = 0;
+                        char c;
+                        char novy;
+
+                        while (i < radek.Length)
                         {
-                            int i = 0;
-                            int j = 0;
-                            char c;
-                            char novy;
+                            c = radek[i];
 
-                            while (i < radek.Length)
+                            #region výpoèet CamelCase
+                            novy = c;
+                            if (odstranitInterpunkci)
                             {
-                                c = radek[i];
-                                novy = camelCase(c);
-                                if (!odstranDiakritiku(c) && !odstranMezeryInterpunkci(c))
+                                if (char.IsWhiteSpace(c) || Interpunkce.interpunkce.Contains(c))
                                 {
-                                    novyRadek[j] = novy;
-                                    j++;
+                                    posledniBilyInterpunkce = true;
                                 }
-                                i++;
+                                // naètený znak
+                                else
+                                {
+                                    // byl naèten znak a znak pøed ním byl bílý, takže se jedná o nové slovo
+                                    if (posledniBilyInterpunkce == true)
+                                    {
+                                        novy = char.ToUpper(c);
+                                    }
+                                    posledniBilyInterpunkce = false;
+                                }
+                            }
+                            #endregion
 
-                                // poøítání prùbìžného stavu zpracování
-                                if (i % 10000 == 0)
-                                {
-                                    Stav += 10000;
-                                    stavZvysen += 10000;
-                                }
-                                
+                            // když se nemá odstranit diakritika nebo se má odstranit a diakritiku neobsahuje
+                            if ((!odstranitDiakritiku || (odstranitDiakritiku && !Diakritika.pismena.Contains(c)))
+                                // a když se má nemá odstranit intrepunkce a mezery nebo má odstranit a interpunkci neobsahuje a neobsahuje bílý znak
+                                && (!odstranitInterpunkci || (odstranitInterpunkci && !Interpunkce.interpunkce.Contains(c) && !char.IsWhiteSpace(c))))
+                            // tak se zapíše nový znak
+                            {
+                                novyRadek[j] = novy;
+                                j++;
+                            }
+                            i++;
 
-                                if (worker != null && worker.CancellationPending)
-                                {
-                                    e.Cancel = true;
-                                    return nahled;
-                                }
+                            // poèítání prùbìžného stavu zpracování
+                            if (i % krokZpracovani == 0)
+                            {
+                                Stav += krokZpracovani;
+                                stavZvysen += krokZpracovani;
 
                                 // ošetøení náhledu pøi velmi dlouhém øádku
-                                if (maxRadku > -1 && radek.Length > 1000)
+                                if (maxRadku > jeNahled)
                                 {
                                     return nahled + novyRadek;
                                 }
-                            }
-                            novyRadekString = new string(novyRadek);
+                            } 
 
-                            // navrácení stavu na pùvodní hodnotu, aby se vyrovnalo druhé zvýšení na konci øádku
-                            if (stavZvysen > 0)
+                            if (worker != null && worker.CancellationPending)
                             {
-                                stav -= stavZvysen;
+                                e.Cancel = true;
+                                if (!(maxRadku > jeNahled))
+                                    sw.Close();
+                                return nahled;
+                            }  
+                        }
+                        if (j > 0)
+                            novyRadekString = new string(novyRadek);
+                        else
+                            novyRadekString = "";
+
+                        // navrácení stavu na pùvodní hodnotu, aby se vyrovnalo druhé zvýšení na konci øádku
+                        if (stavZvysen > 0)
+                        {
+                            stav -= stavZvysen;
+                        }
+                    }
+                    else
+                        novyRadekString = radek;
+
+                    if (!odstranPrazdnyRadek(novyRadekString))
+                    {
+                        if (maxRadku > jeNahled)
+                        {
+                            nahled += novyRadekString.Trim('\0') + System.Environment.NewLine;
+                            radku++;
+                            if (maxRadku > jeNahled && radku >= maxRadku)
+                            {
+                                return nahled;
                             }
                         }
                         else
-                            novyRadekString = radek;
-
-                        if (!odstranPrazdnyRadek(novyRadekString))
                         {
                             if (sr.Peek() == -1)
                             {
@@ -142,22 +196,13 @@ namespace Pøevod_souboru
                             }
                             else
                                 sw.WriteLine(novyRadekString);
-
-                            if (maxRadku > -1) { 
-                                nahled += novyRadekString + System.Environment.NewLine;
-                            }
-                            radku++;
-                        }
-
-                        Stav += radek.Length;
-
-                        if (maxRadku > -1 && radku >= maxRadku)
-                        {
-                            break;
                         }
                     }
+
+                    Stav += radek.Length;
                 }
             }
+            sw.Close();
             return nahled;
         }
 
@@ -176,7 +221,7 @@ namespace Pøevod_souboru
         {
             if (!odstranitDiakritiku)
                 return false;
-            if (Diakritika.maDiakritiku(c))
+            if (Diakritika.pismena.Contains(c))
                 return true;
             return false;
         }
@@ -186,17 +231,18 @@ namespace Pøevod_souboru
         {
             if (!odstranitInterpunkci)
                 return false;
-            if (Interpunkce.jeInterpunkce(c) || char.IsWhiteSpace(c))
+            if (Interpunkce.interpunkce.Contains(c) || char.IsWhiteSpace(c))
                 return true;
             return false;
         }
 
+        // vypoète camelCase. Funkce se v kódu nevolá kvùli vìtši efektivitì výpoètu
         private char camelCase(char c)
         {
             if (!odstranitInterpunkci)
                 return c;
 
-            if (char.IsWhiteSpace(c) || Interpunkce.jeInterpunkce(c))
+            if (char.IsWhiteSpace(c) || Interpunkce.interpunkce.Contains(c))
             {
                 posledniBilyInterpunkce = true;
             }
@@ -214,10 +260,11 @@ namespace Pøevod_souboru
 
             return c;
         }
+
         private void reset()
         {
             stav = 0;
-            staraProcenta = 0;
+            starePromile = 0;
         }
     }
 
