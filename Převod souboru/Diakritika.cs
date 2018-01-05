@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Převod_souboru
 {
+    /// <summary>
+    /// Třída pro zpracování diakritiky
+    /// </summary>
     class Diakritika
     {
         public static char[] pismena
@@ -12,6 +15,12 @@ namespace Převod_souboru
                 'ž', 'Á', 'Ä', 'Č', 'Ď', 'É', 'Ě', 'Í', 'Ľ', 'Ĺ', 'Ň', 'Ó', 'Ö',
                 'Ő', 'Ô', 'Ř', 'Ŕ', 'Š', 'Ť', 'Ú', 'Ů', 'Ü', 'Ű', 'Ý', 'Ž'};
 
+
+        /// <summary>
+        /// Má daný znak diakritiku?
+        /// </summary>
+        /// <param name="c">Posuzovaný znak</param>
+        /// <returns>True pokud znak má diakritiku</returns>
         public static bool maDiakritiku(char c)
         {
             if (pismena.Contains(c))

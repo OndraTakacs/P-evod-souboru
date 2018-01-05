@@ -6,9 +6,16 @@ using System.Linq;
 
 namespace Pøevod_souboru
 {
+
+    /// <summary>
+    /// Tøída realizující pøevod souboru
+    /// </summary>
     public class Prevod
     {
         private string vstupniSoubor;
+        /// <summary>
+        /// Soubor, která se má pøevádìt
+        /// </summary>
         public string VstupniSoubor {
             get
             {
@@ -22,10 +29,24 @@ namespace Pøevod_souboru
                 DelkaSouboru = info.Length;
             }
         }
+
+        
+        /// <summary>
+        /// Soubor, do kterého se mají uložit výsledky
+        /// </summary>
         public string VystupniSoubor { private get; set; }
+
+        /// <summary>
+        /// Kódování vstupního a výstupního souboru. Automaticky rozpoznává jen UTF-8
+        /// </summary>
         public Encoding Kodovani{ get; set; }
 
+
+
         private long stav = 0;
+        /// <summary>
+        /// Stav zpracování souboru v poètu pøeètených znakù
+        /// </summary>
         public long Stav
         {
             get
@@ -51,32 +72,60 @@ namespace Pøevod_souboru
             }
         }
 
+
+        /// <summary>
+        /// Pomocná promìnná pro výpoèet dostateèné zmìny stavu
+        /// </summary>
         private int starePromile = 0;
+
         private BackgroundWorker worker;
 
-        public event EventHandler<StavEventArgs> zmenaStavu;
-        protected virtual void onZmenaStavu(StavEventArgs e)
-        {
-            zmenaStavu?.Invoke(this, e);
-        }
-
-        // má se odstranit diakritika?
+        /// <summary>
+        /// má se odstranit diakritika?
+        /// </summary>
         public bool odstranitDiakritiku { get; set; } = false;
-        // mají se odstranit prázdné øádky?
+
+        /// <summary>
+        /// mají se odstranit prázdné øádky?
+        /// </summary>
         public bool odstranitRadky { get; set; } = false;
-        // mají se odstranit mezery a interpunkce a použít CamelCase?
+
+        /// <summary>
+        /// mají se odstranit mezery a interpunkce a použít CamelCase?
+        /// </summary>
         public bool odstranitInterpunkci { get; set; } = false;
 
+
+        /// <summary>
+        /// Délka souboru ve znacích
+        /// </summary>
         public long DelkaSouboru { get; set; } = 0;
 
+        
+        /// <summary>
+        /// Byl poslední naètený znak pøed aktuálním znakem bílý nebo interpunkce?
+        /// </summary>
         private bool posledniBilyInterpunkce = false;
 
-        // poèet znakù po kterém se aktualizuje stav zpracování
+        /// <summary>
+        /// Poèet znakù na øádku, po kterém se aktualizuje stav zpracování
+        /// </summary>
         private static int krokZpracovani = 5000;
 
-        private static int jeNahled = -1;
+
+        /// <summary>
+        /// Konstanta, která urèuje, kdy se nejedná o náhled
+        /// </summary>
+        private static int neniNahled = -1;
 
 
+        /// <summary>
+        /// Zpracuje soubor uložený ve vstupniSoubor a výstup vrátí ve formì náhledu nebo jej zapíše do souboru
+        /// </summary>
+        /// <param name="maxRadku"> maximální poèet øádkù pøi náhlade, -1 udává, že nejde o náhled</param>
+        /// <param name="sender">BackgroundWorker, který volal tuto metodu</param>
+        /// <param name="e">Událost od BackgroundWorkera</param>
+        /// <returns>Náhled prvních nìkolika øádkù zpracovaného souboru</returns>
         public string preved(int maxRadku = -1, object sender = null, DoWorkEventArgs e = null)
         {
             string nahled = "";
@@ -87,25 +136,36 @@ namespace Pøevod_souboru
             StreamWriter sw = null;
             using (StreamReader sr = new StreamReader(VstupniSoubor))
             {
-                if (!(maxRadku > jeNahled))
+                // když se nejedná o náhled, tak se zapisuje na výstup
+                if (maxRadku == neniNahled)
                 {
                     sw = new StreamWriter(new FileStream(VystupniSoubor, FileMode.Create), Kodovani);
                 }
+                // øádek naètený ze vstupního souboru
                 string radek;
+                // øádek, který se má zapsat na výstup nebo do náhledu
                 string novyRadekString = "";
+                // pro každý øádek souboru
                 while ((radek = sr.ReadLine()) != null)
                 {
                     // udává o kolik byl zvýšen prùbìžný stav zpracování
                     long stavZvysen = 0;
-                    // použití pole znakù pro vìtší efektivitu
+                    // použití pole znakù pro nový øádek pro vìtší efektivitu
                     char[] novyRadek = new char[radek.Length];
+
+                    // jestli se má odstranit diakritika nebo interpunkce, je tøeba projít všechny znaky øádku
                     if (odstranitDiakritiku || odstranitInterpunkci)
                     {
+                        // index vstupního øádku
                         int i = 0;
+                        // index výstupního øádku
                         int j = 0;
+                        // aktuálnì naètený znak
                         char c;
+                        // novì naètený znak
                         char novy;
 
+                        // zpracování všech znakù øádku
                         while (i < radek.Length)
                         {
                             c = radek[i];
@@ -142,52 +202,64 @@ namespace Pøevod_souboru
                             }
                             i++;
 
-                            // poèítání prùbìžného stavu zpracování
+                            #region poèítání prùbìžného stavu zpracování
                             if (i % krokZpracovani == 0)
                             {
                                 Stav += krokZpracovani;
                                 stavZvysen += krokZpracovani;
 
                                 // ošetøení náhledu pøi velmi dlouhém øádku
-                                if (maxRadku > jeNahled)
+                                if (maxRadku > neniNahled)
                                 {
                                     return nahled + novyRadek;
                                 }
-                            } 
+                            }
+                            #endregion
 
+                            #region zpracování požadavku na pøerušení operace
                             if (worker != null && worker.CancellationPending)
                             {
                                 e.Cancel = true;
-                                if (!(maxRadku > jeNahled))
+                                if (!(maxRadku > neniNahled))
                                     sw.Close();
                                 return nahled;
-                            }  
+                            }
+                            #endregion
                         }
+
+                        #region ošetøení vkládání prázných znakù do øetìzce
                         if (j > 0)
                             novyRadekString = new string(novyRadek);
                         else
                             novyRadekString = "";
+                        #endregion
 
-                        // navrácení stavu na pùvodní hodnotu, aby se vyrovnalo druhé zvýšení na konci øádku
+                        #region navrácení stavu na pùvodní hodnotu, aby se vyrovnalo druhé zvýšení na konci øádku
                         if (stavZvysen > 0)
                         {
                             stav -= stavZvysen;
                         }
+                        #endregion
                     }
+                    // nebylo tøeba zpracovávat øádek
                     else
                         novyRadekString = radek;
 
+                    // pokud se nemá pøeskoèit prázdný øádek
                     if (!odstranPrazdnyRadek(novyRadekString))
                     {
-                        if (maxRadku > jeNahled)
+                        #region uložení náhledu
+                        if (maxRadku > neniNahled)
                         {
                             nahled += novyRadekString.Trim('\0') + System.Environment.NewLine;
                             radku++;
-                            if (maxRadku > jeNahled && radku >= maxRadku)
+                            if (maxRadku > neniNahled && radku >= maxRadku)
                             {
                                 return nahled;
                             }
                         }
+                        #endregion
+                        #region uložení do výstupního souboru
                         else
                         {
                             if (sr.Peek() == -1)
@@ -197,8 +269,9 @@ namespace Pøevod_souboru
                             else
                                 sw.WriteLine(novyRadekString);
                         }
+                        #endregion
                     }
-
+                    // aktualizase stavu zpracování
                     Stav += radek.Length;
                 }
             }
@@ -206,7 +279,11 @@ namespace Pøevod_souboru
             return nahled;
         }
 
-        // vrací true, když se má odstranit øádek
+        /// <summary>
+        /// Má se odstranit prázdný øádek?
+        /// </summary>
+        /// <param name="radek">Øádek dat</param>
+        /// <returns>True pokud se má øádek odstranit</returns>
         private bool odstranPrazdnyRadek(string radek)
         {
             if (!odstranitRadky)
@@ -216,7 +293,11 @@ namespace Pøevod_souboru
             return true;
         }
 
-        // vrací true, když se má odstranit znak
+        /// <summary>
+        /// Má se odstranit znak?
+        /// </summary>
+        /// <param name="c">Znak, jehož odstranìní se posuzuje</param>
+        /// <returns>Vrací true, když se má odstranit znak</returns>
         private bool odstranDiakritiku(char c)
         {
             if (!odstranitDiakritiku)
@@ -226,7 +307,13 @@ namespace Pøevod_souboru
             return false;
         }
 
-        // vrací true, když se má odstranit znak
+        // 
+
+        /// <summary>
+        /// Má se odstranit tento znak v pøípadì mezery nebo interpunkce?
+        /// </summary>
+        /// <param name="c">Posuzovaný znak</param>
+        /// <returns>Vrací true, když se má odstranit zadaný znak</returns>
         private bool odstranMezeryInterpunkci(char c)
         {
             if (!odstranitInterpunkci)
@@ -236,7 +323,11 @@ namespace Pøevod_souboru
             return false;
         }
 
-        // vypoète camelCase. Funkce se v kódu nevolá kvùli vìtši efektivitì výpoètu
+        /// <summary>
+        /// Vypoète CamelCase. Funkce se v kódu nevolá kvùli vìtši efektivitì výpoètu
+        /// </summary>
+        /// <param name="c">Znak, který se má pøevádìt</param>
+        /// <returns>pùvodní znak nebo velký znak</returns>
         private char camelCase(char c)
         {
             if (!odstranitInterpunkci)
@@ -261,19 +352,15 @@ namespace Pøevod_souboru
             return c;
         }
 
+
+        /// <summary>
+        /// Znovunastavení promìnných tøídy
+        /// </summary>
         private void reset()
         {
             stav = 0;
             starePromile = 0;
-        }
-    }
-
-    public class StavEventArgs : EventArgs
-    {
-        public int stav;
-        public StavEventArgs(int s)
-        {
-            stav = s;
+            posledniBilyInterpunkce = false;
         }
     }
 }

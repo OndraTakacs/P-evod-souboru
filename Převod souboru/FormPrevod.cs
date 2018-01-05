@@ -13,13 +13,29 @@ namespace Převod_souboru
 {
     public partial class FormPrevod : Form
     {
+
+        /// <summary>
+        /// Objekt pro zpracování souboru
+        /// </summary>
         private Prevod prevod;
 
+
+        /// <summary>
+        /// Objekt pro výpočet vstupních statistik
+        /// </summary>
         private Statistiky vstupStatistiky;
 
+
+        /// <summary>
+        /// Objekt pro výpočet výstupních statistik
+        /// </summary>
         private Statistiky vystupStatistiky;
 
         private string vstupniSoubor;
+
+        /// <summary>
+        /// Vstupní soubor, který se má zpracovat
+        /// </summary>
         private string VstupniSoubor
         {
             get { return vstupniSoubor; }
@@ -32,6 +48,10 @@ namespace Převod_souboru
         }
 
         private string vystupniSoubor;
+
+        /// <summary>
+        /// Výstupní soubor, do kterého se uloží zpracovaný vstupní soubor
+        /// </summary>
         private string VystupniSoubor
         {
             get { return vystupniSoubor; }
@@ -47,7 +67,6 @@ namespace Převod_souboru
         {
             InitializeComponent();
             prevod = new Prevod();
-            prevod.zmenaStavu += onZmenaStavu;
             vstupStatistiky = new Statistiky();
             vystupStatistiky = new Statistiky();
         }
@@ -57,27 +76,20 @@ namespace Převod_souboru
 
         }
 
-        private void onZmenaStavu(object sender, StavEventArgs e)
-        {
-            progressBar1.Value = e.stav;
-            labelProgress.Text = (e.stav / 10).ToString() + "%";
-            labelProgress.Refresh();
-        }
-
         private void buttonPreved_Click(object sender, EventArgs e)
         {
             if (!kontrolaSouboru(true) || backgroundWorkerPreved.IsBusy)
                 return;
-
-            progressBar1.Visible = true;
-            labelProgress.Visible = true;
+            // aktualizace délky vstupního souboru podle spočítáných statistik
             prevod.DelkaSouboru = vstupStatistiky.Znaky;
 
+            #region spočítání statistik
             uzamkni();
             labelStav.Text = "Převádím soubor";
             progressBar1.Value = 0;
             labelProgress.Text = "0%";
             backgroundWorkerPreved.RunWorkerAsync();
+            #endregion
         }
 
         private void ButtonOtevri_Click(object sender, EventArgs e)
@@ -87,14 +99,18 @@ namespace Převod_souboru
                 VstupniSoubor = openFileDialog1.FileName;
                 textBoxVstup.Text = System.IO.Path.GetFileName(VstupniSoubor);
 
+                #region zobrazení náhledu vstupního i výstupního souboru
                 textBoxNahledVstup.Text = vratNahled(VstupniSoubor, 10);
                 zobrazVystupNahled();
+                #endregion
 
+                #region spočítání statistik
                 uzamkni();
                 labelStav.Text = "Počítám statistiky vstupního souboru";
                 progressBar1.Value = 0;
                 labelProgress.Text = "0%";
                 backgroundWorkerStatistikyVstup.RunWorkerAsync();
+                #endregion
             }
         }
 
@@ -107,25 +123,6 @@ namespace Převod_souboru
 
                 zobrazVystupNahled();
             }
-        }
-
-        private string vratNahled(string soubor, int radku)
-        {
-            string nahled = "";
-            StreamReader sr = new StreamReader(soubor);
-            for (int i = 0; i < radku; i++)
-            {
-                if (sr.Peek() == -1)
-                    break;
-                nahled += sr.ReadLine() + System.Environment.NewLine;
-            }
-            return nahled;
-        }
-
-        private void zobrazVystupNahled()
-        {
-            if (VstupniSoubor != null)
-                textBoxNahledVystup.Text = prevod.preved(10);
         }
 
         private void checkBoxDiakritika_CheckedChanged(object sender, EventArgs e)
@@ -145,44 +142,6 @@ namespace Převod_souboru
         {
             prevod.odstranitInterpunkci = checkBoxMezery.Checked;
             zobrazVystupNahled();
-        }
-
-        private bool kontrolaSouboru(bool upozorneni)
-        {
-            if (vstupniSoubor == null)
-            {
-                if (upozorneni)
-                    MessageBox.Show("Vyberte vstupní soubor", "Upozornění");
-                return false;
-            }
-            if (vystupniSoubor == null)
-            {
-                if (upozorneni)
-                    MessageBox.Show("Vyberte výstupní soubor", "Upozornění");
-                return false;
-            }
-            return true;
-        }
-
-        private void uzamkni()
-        {
-            buttonPreved.Enabled = false;
-            ButtonOtevri.Enabled = false;
-            ButtonUloz.Enabled = false;
-            checkBoxDiakritika.Enabled = false;
-            checkBoxMezery.Enabled = false;
-            checkBoxRadky.Enabled = false;
-        }
-
-
-        private void odemkni()
-        {
-            buttonPreved.Enabled = true;
-            ButtonOtevri.Enabled = true;
-            ButtonUloz.Enabled = true;
-            checkBoxDiakritika.Enabled = true;
-            checkBoxMezery.Enabled = true;
-            checkBoxRadky.Enabled = true;
         }
 
         private void buttonZrusit_Click(object sender, EventArgs e)
@@ -289,6 +248,84 @@ namespace Převod_souboru
                 labelVystupRadky.Text = vystupStatistiky.Radky.ToString();
                 labelVystupZnaky.Text = vystupStatistiky.Znaky.ToString();
             }
+        }
+
+        /// <summary>
+        /// Vrátí náhled zadaného souboru
+        /// </summary>
+        /// <param name="soubor">Nahlížený soubor</param>
+        /// <param name="radku">Počet řádků v náhledu</param>
+        /// <returns>Náhled začátku souboru</returns>
+        private string vratNahled(string soubor, int radku)
+        {
+            string nahled = "";
+            StreamReader sr = new StreamReader(soubor);
+            for (int i = 0; i < radku; i++)
+            {
+                if (sr.Peek() == -1)
+                    break;
+                nahled += sr.ReadLine() + System.Environment.NewLine;
+            }
+            return nahled;
+        }
+
+        /// <summary>
+        /// Zobrazí náhled zpracovaného souboru
+        /// </summary>
+        private void zobrazVystupNahled()
+        {
+            if (VstupniSoubor != null)
+                textBoxNahledVystup.Text = prevod.preved(10);
+        }
+
+
+        /// <summary>
+        /// Zkontroluje, jestli je zadán vstupní a výstupní soubor a případně zobrazí upozornění
+        /// </summary>
+        /// <param name="upozorneni">Má se zobrazit upozornění?</param>
+        /// <returns>True pokud jsou oba soubory zadány</returns>
+        private bool kontrolaSouboru(bool upozorneni)
+        {
+            if (vstupniSoubor == null)
+            {
+                if (upozorneni)
+                    MessageBox.Show("Vyberte vstupní soubor", "Upozornění");
+                return false;
+            }
+            if (vystupniSoubor == null)
+            {
+                if (upozorneni)
+                    MessageBox.Show("Vyberte výstupní soubor", "Upozornění");
+                return false;
+            }
+            return true;
+        }
+
+
+        /// <summary>
+        /// Uzamkne všechny ovládací prvky kromě tlačítka pro zrušení operace
+        /// </summary>
+        private void uzamkni()
+        {
+            buttonPreved.Enabled = false;
+            ButtonOtevri.Enabled = false;
+            ButtonUloz.Enabled = false;
+            checkBoxDiakritika.Enabled = false;
+            checkBoxMezery.Enabled = false;
+            checkBoxRadky.Enabled = false;
+        }
+
+        /// <summary>
+        /// Odemkne všechny ovládací prvky kromě tlačítka pro zrušení operace
+        /// </summary>
+        private void odemkni()
+        {
+            buttonPreved.Enabled = true;
+            ButtonOtevri.Enabled = true;
+            ButtonUloz.Enabled = true;
+            checkBoxDiakritika.Enabled = true;
+            checkBoxMezery.Enabled = true;
+            checkBoxRadky.Enabled = true;
         }
     }
 }
