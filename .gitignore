@@ -259,5 +259,4 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-/Převod souboru/test/7MB.txt
 /Převod souboru/test/342MB.txt
